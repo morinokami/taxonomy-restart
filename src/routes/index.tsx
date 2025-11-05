@@ -198,7 +198,7 @@ function IndexPage() {
 				<div className="mx-auto text-center md:max-w-232">
 					<p className="text-muted-foreground leading-normal sm:text-lg sm:leading-7">
 						Taxonomy also includes a blog and a full-featured documentation site
-						built using Contentlayer and MDX.
+						built using Content Collections and MDX.
 					</p>
 				</div>
 			</section>

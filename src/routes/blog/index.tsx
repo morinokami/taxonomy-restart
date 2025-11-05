@@ -23,7 +23,7 @@ function RouteComponent() {
 						Blog
 					</h1>
 					<p className="text-muted-foreground text-xl">
-						A blog built using Contentlayer. Posts are written in MDX.
+						A blog built using Content Collections. Posts are written in MDX.
 					</p>
 				</div>
 			</div>
