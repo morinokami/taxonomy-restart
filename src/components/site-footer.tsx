@@ -1,9 +1,9 @@
 import type * as React from "react";
 
-import { siteConfig } from "../config/site";
-import { cn } from "../lib/utils";
-import { Icons } from "./icons";
-import { ModeToggle } from "./mode-toggle";
+import { Icons } from "@/components/icons";
+import { ModeToggle } from "@/components/mode-toggle";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
 	return (

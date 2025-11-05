@@ -7,12 +7,12 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
-import { MainNav } from "../components/main-nav";
-import { SiteFooter } from "../components/site-footer";
-import { buttonVariants } from "../components/ui/button";
-import { marketingConfig } from "../config/marketing";
-import { cn } from "../lib/utils";
-import appCss from "../styles.css?url";
+import { MainNav } from "@/components/main-nav";
+import { SiteFooter } from "@/components/site-footer";
+import { buttonVariants } from "@/components/ui/button";
+import { marketingConfig } from "@/config/marketing";
+import { cn } from "@/lib/utils";
+import appCss from "@/styles.css?url";
 
 export const Route = createRootRoute({
 	head: () => ({

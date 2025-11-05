@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import { buttonVariants } from "../components/ui/button";
-import { siteConfig } from "../config/site";
-import { cn } from "../lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
 	component: IndexPage,
@@ -61,7 +61,7 @@ function IndexPage() {
 					<p className="max-w-[85%] text-muted-foreground leading-normal sm:text-lg sm:leading-7">
 						This project is an experiment to see how a modern app, with features
 						like auth, subscriptions, API routes, and static pages would work in
-						Next.js 13 app dir.
+						TanStack Start.
 					</p>
 				</div>
 				<div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-5xl md:grid-cols-3">

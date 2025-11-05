@@ -1,11 +1,11 @@
-import { Button } from "../components/ui/button";
+import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
-import { Icons } from "./icons";
+} from "@/components/ui/dropdown-menu";
 
 export function ModeToggle() {
 	return (

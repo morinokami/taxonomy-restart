@@ -33,6 +33,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.3",
+    "@content-collections/core": "0.12.0",
+    "@content-collections/mdx": "0.2.2",
+    "@content-collections/vite": "0.2.7",
     "@fontsource-variable/inter": "5.2.8",
     "@fontsource/cal-sans": "5.2.3",
     "@tanstack/devtools-vite": "0.3.11",
@@ -47,7 +50,9 @@
     "jsdom": "27.1.0",
     "typescript": "5.9.3",
     "vite": "7.1.12",
+    "vite-tsconfig-paths": "5.1.4",
     "vitest": "4.0.6",
-    "web-vitals": "5.1.0"
+    "web-vitals": "5.1.0",
+    "zod": "4.1.12"
   }
 }
