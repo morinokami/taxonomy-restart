@@ -1,5 +1,6 @@
 import type { MarketingConfig } from "types";
 
+// TODO: Use linkOptions
 export const marketingConfig: MarketingConfig = {
 	mainNav: [
 		{

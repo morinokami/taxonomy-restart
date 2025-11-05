@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { buttonVariants } from "../components/ui/button";
 import { siteConfig } from "../config/site";
@@ -35,9 +35,9 @@ function IndexPage() {
 						everything. Follow along as we figure this out together.
 					</p>
 					<div className="space-x-4">
-						<a href="/login" className={cn(buttonVariants({ size: "lg" }))}>
+						<Link to="/login" className={cn(buttonVariants({ size: "lg" }))}>
 							Get Started
-						</a>
+						</Link>
 						<a
 							href={siteConfig.links.github}
 							target="_blank"

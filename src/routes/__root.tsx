@@ -1,5 +1,10 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+	createRootRoute,
+	HeadContent,
+	Link,
+	Scripts,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { MainNav } from "../components/main-nav";
@@ -46,15 +51,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						<div className="flex h-20 items-center justify-between py-6">
 							<MainNav items={marketingConfig.mainNav} />
 							<nav>
-								<a
-									href="/login"
+								<Link
+									to="/login"
 									className={cn(
 										buttonVariants({ variant: "secondary", size: "sm" }),
 										"px-4",
 									)}
 								>
 									Login
-								</a>
+								</Link>
 							</nav>
 						</div>
 					</header>

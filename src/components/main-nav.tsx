@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import type { MainNavItem } from "types";
 
@@ -13,22 +14,23 @@ interface MainNavProps {
 }
 
 export function MainNav({ items, children }: MainNavProps) {
+	// TODO: Highlight the active link
 	const [showMobileMenu, setShowMobileMenu] = useState(false);
 
 	return (
 		<div className="flex gap-6 md:gap-10">
-			<a href="/" className="hidden items-center space-x-2 md:flex">
+			<Link to="/" className="hidden items-center space-x-2 md:flex">
 				<Icons.logo />
 				<span className="hidden font-bold sm:inline-block">
 					{siteConfig.name}
 				</span>
-			</a>
+			</Link>
 			{items?.length ? (
 				<nav className="hidden gap-6 md:flex">
 					{items?.map((item) => (
-						<a
+						<Link
 							key={item.title}
-							href={item.disabled ? "#" : item.href}
+							to={item.disabled ? "#" : item.href}
 							className={cn(
 								"flex items-center font-medium text-lg transition-colors hover:text-foreground/80 sm:text-sm",
 								item.href.startsWith(`/${"TODO:"}`)
@@ -38,7 +40,7 @@ export function MainNav({ items, children }: MainNavProps) {
 							)}
 						>
 							{item.title}
-						</a>
+						</Link>
 					))}
 				</nav>
 			) : null}

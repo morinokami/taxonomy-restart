@@ -1,14 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { Icons } from "../../components/icons";
-import { buttonVariants } from "../..//components/ui/button";
-import { cn } from "../..//lib/utils";
+import { buttonVariants } from "../../components/ui/button";
+import { cn } from "../../lib/utils";
 
 export const Route = createFileRoute("/pricing/")({
-	component: RouteComponent,
+	component: PricingPage,
 });
 
-function RouteComponent() {
+function PricingPage() {
 	return (
 		<section className="container flex flex-col gap-6 py-8 md:max-w-5xl md:py-12 lg:py-24">
 			<div className="mx-auto flex w-full flex-col gap-4 md:max-w-232">
@@ -53,9 +53,9 @@ function RouteComponent() {
 							Billed Monthly
 						</p>
 					</div>
-					<a href="/login" className={cn(buttonVariants({ size: "lg" }))}>
+					<Link to="/login" className={cn(buttonVariants({ size: "lg" }))}>
 						Get Started
-					</a>
+					</Link>
 				</div>
 			</div>
 			<div className="mx-auto flex w-full max-w-232 flex-col gap-4">
