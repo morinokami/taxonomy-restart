@@ -19,7 +19,7 @@ function IndexPage() {
 	return (
 		<>
 			<section className="space-y-6 pt-6 pb-8 md:pt-10 md:pb-12 lg:py-32">
-				<div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
+				<div className="container flex max-w-5xl flex-col items-center gap-4 text-center">
 					<a
 						href={siteConfig.links.twitter}
 						className="rounded-2xl bg-muted px-4 py-1.5 font-medium text-sm"
@@ -30,7 +30,7 @@ function IndexPage() {
 					<h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
 						An example app built using TanStack Start.
 					</h1>
-					<p className="max-w-[42rem] text-muted-foreground leading-normal sm:text-xl sm:leading-8">
+					<p className="max-w-2xl text-muted-foreground leading-normal sm:text-xl sm:leading-8">
 						I&apos;m building a web app with TanStack Start and open sourcing
 						everything. Follow along as we figure this out together.
 					</p>
@@ -53,7 +53,7 @@ function IndexPage() {
 				id="features"
 				className="container space-y-6 bg-slate-50 py-8 md:py-12 lg:py-24 dark:bg-transparent"
 			>
-				<div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
+				<div className="mx-auto flex max-w-232 flex-col items-center space-y-4 text-center">
 					<h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
 						Features
 					</h2>
@@ -63,7 +63,7 @@ function IndexPage() {
 						Next.js 13 app dir.
 					</p>
 				</div>
-				<div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
+				<div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-5xl md:grid-cols-3">
 					<div className="relative overflow-hidden rounded-lg border bg-background p-2">
 						<div className="flex h-[180px] flex-col justify-between rounded-md p-6">
 							<svg viewBox="0 0 663 660" className="h-12 w-12 fill-current">
@@ -159,7 +159,7 @@ function IndexPage() {
 						</div>
 					</div>
 				</div>
-				<div className="mx-auto text-center md:max-w-[58rem]">
+				<div className="mx-auto text-center md:max-w-232">
 					<p className="text-muted-foreground leading-normal sm:text-lg sm:leading-7">
 						Taxonomy also includes a blog and a full-featured documentation site
 						built using Contentlayer and MDX.
@@ -167,7 +167,7 @@ function IndexPage() {
 				</div>
 			</section>
 			<section id="open-source" className="container py-8 md:py-12 lg:py-24">
-				<div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+				<div className="mx-auto flex max-w-232 flex-col items-center justify-center gap-4 text-center">
 					<h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
 						Proudly Open Source
 					</h2>

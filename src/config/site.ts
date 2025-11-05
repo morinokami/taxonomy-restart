@@ -1,4 +1,6 @@
-export const siteConfig = {
+import type { SiteConfig } from "types";
+
+export const siteConfig: SiteConfig = {
 	name: "Taxonomy Restart",
 	description:
 		"TODO: An open source application built using the new router, server components and everything new in Next.js 13.",

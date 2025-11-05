@@ -1,0 +1,58 @@
+import { useState } from "react";
+import type { MainNavItem } from "types";
+
+import { Icons } from "../components/icons";
+import { siteConfig } from "../config/site";
+import { cn } from "../lib/utils";
+
+// import { MobileNav } from "./components/mobile-nav";
+
+interface MainNavProps {
+	items?: MainNavItem[];
+	children?: React.ReactNode;
+}
+
+export function MainNav({ items, children }: MainNavProps) {
+	const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+	return (
+		<div className="flex gap-6 md:gap-10">
+			<a href="/" className="hidden items-center space-x-2 md:flex">
+				<Icons.logo />
+				<span className="hidden font-bold sm:inline-block">
+					{siteConfig.name}
+				</span>
+			</a>
+			{items?.length ? (
+				<nav className="hidden gap-6 md:flex">
+					{items?.map((item) => (
+						<a
+							key={item.title}
+							href={item.disabled ? "#" : item.href}
+							className={cn(
+								"flex items-center font-medium text-lg transition-colors hover:text-foreground/80 sm:text-sm",
+								item.href.startsWith(`/${"TODO:"}`)
+									? "text-foreground"
+									: "text-foreground/60",
+								item.disabled && "cursor-not-allowed opacity-80",
+							)}
+						>
+							{item.title}
+						</a>
+					))}
+				</nav>
+			) : null}
+			<button
+				type="button"
+				className="flex items-center space-x-2 md:hidden"
+				onClick={() => setShowMobileMenu(!showMobileMenu)}
+			>
+				{showMobileMenu ? <Icons.close /> : <Icons.logo />}
+				<span className="font-bold">Menu</span>
+			</button>
+			{/* {showMobileMenu && items && (
+				<MobileNav items={items}>{children}</MobileNav>
+			)} */}
+		</div>
+	);
+}
