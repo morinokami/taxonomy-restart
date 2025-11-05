@@ -7,6 +7,7 @@ import { cn } from "../lib/utils";
 export const Route = createFileRoute("/")({
 	component: IndexPage,
 	loader: async () => {
+		// TODO:
 		return {
 			stars: 666,
 		};
@@ -97,29 +98,60 @@ function IndexPage() {
 					</div>
 					<div className="relative overflow-hidden rounded-lg border bg-background p-2">
 						<div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-							<svg viewBox="0 0 24 24" className="h-12 w-12 fill-current">
-								<title>PlanetScale</title>
-								<path d="M0 12C0 5.373 5.373 0 12 0c4.873 0 9.067 2.904 10.947 7.077l-15.87 15.87a11.981 11.981 0 0 1-1.935-1.099L14.99 12H12l-8.485 8.485A11.962 11.962 0 0 1 0 12Zm12.004 12L24 12.004C23.998 18.628 18.628 23.998 12.004 24Z" />
+							<svg
+								width="58"
+								height="57"
+								viewBox="0 0 58 57"
+								className="h-12 w-12 fill-current"
+							>
+								<title>Neon</title>
+								<path
+									fill-rule="evenodd"
+									clip-rule="evenodd"
+									d="M0 9.82759C0 4.39996 4.47705 0 9.99976 0H47.9989C53.5216 0 57.9986 4.39996 57.9986 9.82759V41.5893C57.9986 47.2045 50.7684 49.6414 47.2618 45.2082L36.2991 31.3488V48.1552C36.2991 53.04 32.2698 57 27.2993 57H9.99976C4.47705 57 0 52.6 0 47.1724V9.82759ZM9.99976 7.86207C8.89522 7.86207 7.99981 8.74206 7.99981 9.82759V47.1724C7.99981 48.2579 8.89522 49.1379 9.99976 49.1379H27.5993C28.1516 49.1379 28.2993 48.6979 28.2993 48.1552V25.6178C28.2993 20.0027 35.5295 17.5656 39.0361 21.9989L49.9988 35.8583V9.82759C49.9988 8.74206 50.1034 7.86207 48.9988 7.86207H9.99976Z"
+								/>
+								<path d="M48.0003 0C53.523 0 58 4.39996 58 9.82759V41.5893C58 47.2045 50.7699 49.6414 47.2633 45.2082L36.3006 31.3488V48.1552C36.3006 53.04 32.2712 57 27.3008 57C27.8531 57 28.3008 56.56 28.3008 56.0172V25.6178C28.3008 20.0027 35.5309 17.5656 39.0375 21.9989L50.0002 35.8583V1.96552C50.0002 0.879992 49.1048 0 48.0003 0Z" />
 							</svg>
 							<div className="space-y-2">
 								<h3 className="font-bold">Database</h3>
 								<p className="text-muted-foreground text-sm">
-									ORM using Prisma and deployed on PlanetScale.
+									ORM using Prisma and deployed on Neon.
 								</p>
 							</div>
 						</div>
 					</div>
 					<div className="relative overflow-hidden rounded-lg border bg-background p-2">
 						<div className="flex h-[180px] flex-col justify-between rounded-md p-6">
-							<svg viewBox="0 0 24 24" className="h-12 w-12 fill-current">
-								<title>Tailwind CSS</title>
-								<path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
+							<svg viewBox="0 0 256 256" className="h-12 w-12 fill-current">
+								<title>shadcn/ui</title>
+								<rect width="256" height="256" fill="none" />
+								<line
+									x1="208"
+									y1="128"
+									x2="128"
+									y2="208"
+									fill="none"
+									stroke="currentColor"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="32"
+								/>
+								<line
+									x1="192"
+									y1="40"
+									x2="40"
+									y2="192"
+									fill="none"
+									stroke="currentColor"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="32"
+								/>
 							</svg>
 							<div className="space-y-2">
 								<h3 className="font-bold">Components</h3>
 								<p className="text-muted-foreground text-sm">
-									UI components built using Radix UI and styled with Tailwind
-									CSS.
+									UI components built using shadcn/ui.
 								</p>
 							</div>
 						</div>
@@ -127,19 +159,23 @@ function IndexPage() {
 					<div className="relative overflow-hidden rounded-lg border bg-background p-2">
 						<div className="flex h-[180px] flex-col justify-between rounded-md p-6">
 							<svg
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="1"
+								width="128"
+								height="128"
+								viewBox="0 0 128 128"
 								className="h-12 w-12 fill-current"
 							>
-								<title>NextAuth.js</title>
-								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+								<title>Clerk</title>
+								<circle cx="64" cy="64" r="20" />
+								<path
+									d="M99.5716 10.788C101.571 12.1272 101.742 14.9444 100.04 16.646L85.4244 31.2618C84.1035 32.5828 82.0542 32.7914 80.3915 31.9397C75.4752 29.421 69.9035 28 64 28C44.1177 28 28 44.1177 28 64C28 69.9035 29.421 75.4752 31.9397 80.3915C32.7914 82.0542 32.5828 84.1035 31.2618 85.4244L16.646 100.04C14.9444 101.742 12.1272 101.571 10.788 99.5716C3.97411 89.3989 0 77.1635 0 64C0 28.6538 28.6538 0 64 0C77.1635 0 89.3989 3.97411 99.5716 10.788Z"
+									fill-opacity="0.4"
+								/>
+								<path d="M100.04 111.354C101.742 113.056 101.571 115.873 99.5717 117.212C89.3989 124.026 77.1636 128 64 128C50.8364 128 38.6011 124.026 28.4283 117.212C26.4289 115.873 26.2581 113.056 27.9597 111.354L42.5755 96.7382C43.8965 95.4172 45.9457 95.2085 47.6084 96.0603C52.5248 98.579 58.0964 100 64 100C69.9036 100 75.4753 98.579 80.3916 96.0603C82.0543 95.2085 84.1036 95.4172 85.4245 96.7382L100.04 111.354Z" />
 							</svg>
 							<div className="space-y-2">
 								<h3 className="font-bold">Authentication</h3>
 								<p className="text-muted-foreground text-sm">
-									Authentication using NextAuth.js and middlewares.
+									Authentication using Clerk and middlewares.
 								</p>
 							</div>
 						</div>

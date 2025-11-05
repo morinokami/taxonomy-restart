@@ -6,6 +6,13 @@ import { cn } from "../../lib/utils";
 
 export const Route = createFileRoute("/pricing/")({
 	component: PricingPage,
+	head: () => ({
+		meta: [
+			{
+				title: "Pricing | Taxonomy Restart",
+			},
+		],
+	}),
 });
 
 function PricingPage() {
