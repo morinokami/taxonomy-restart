@@ -2,6 +2,9 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
+import { SiteFooter } from "../components/site-footer";
+import { buttonVariants } from "../components/ui/button";
+import { cn } from "../lib/utils";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
@@ -35,11 +38,30 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 			</head>
-			<body>
-				{children}
+			<body className="min-h-screen bg-background font-sans antialiased">
+				<div className="flex min-h-screen flex-col">
+					<header className="container z-40 bg-background">
+						<div className="flex h-20 items-center justify-between py-6">
+							{/* <MainNav items={marketingConfig.mainNav} /> */}
+							<nav>
+								<a
+									href="/login"
+									className={cn(
+										buttonVariants({ variant: "secondary", size: "sm" }),
+										"px-4",
+									)}
+								>
+									Login
+								</a>
+							</nav>
+						</div>
+					</header>
+					<main className="flex-1">{children}</main>
+					<SiteFooter />
+				</div>
 				<TanStackDevtools
 					config={{
-						position: "bottom-right",
+						position: "bottom-left",
 					}}
 					plugins={[
 						{
