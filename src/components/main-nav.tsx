@@ -14,7 +14,6 @@ interface MainNavProps {
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-	// TODO: Highlight the active link
 	const [showMobileMenu, setShowMobileMenu] = useState(false);
 
 	return (
@@ -32,10 +31,7 @@ export function MainNav({ items, children }: MainNavProps) {
 							key={item.title}
 							to={item.disabled ? "#" : item.href}
 							className={cn(
-								"flex items-center font-medium text-lg transition-colors hover:text-foreground/80 sm:text-sm",
-								item.href.startsWith(`/${"TODO:"}`)
-									? "text-foreground"
-									: "text-foreground/60",
+								"flex items-center font-medium text-foreground/60 text-lg transition-colors hover:text-foreground/80 sm:text-sm [&.active]:text-foreground",
 								item.disabled && "cursor-not-allowed opacity-80",
 							)}
 						>
