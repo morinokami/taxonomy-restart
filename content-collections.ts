@@ -9,7 +9,7 @@ const authors = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		avatar: z.string(),
-		twitter: z.string(),
+		x: z.string(),
 	}),
 });
 

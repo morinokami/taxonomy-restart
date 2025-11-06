@@ -56,7 +56,7 @@ function RouteComponent() {
 							author ? (
 								<a
 									key={author.title}
-									href={`https://twitter.com/${author.twitter}`}
+									href={`https://x.com/${author.x}`}
 									className="flex items-center space-x-2 text-sm"
 								>
 									<img
@@ -69,7 +69,7 @@ function RouteComponent() {
 									<div className="flex-1 text-left leading-tight">
 										<p className="font-medium">{author.title}</p>
 										<p className="text-[12px] text-muted-foreground">
-											@{author.twitter}
+											@{author.x}
 										</p>
 									</div>
 								</a>

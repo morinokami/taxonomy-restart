@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
 	url: "https://taxonomy-restart.vercel.app",
 	ogImage: "https://tx.shadcn.com/og.jpg",
 	links: {
-		twitter: "https://x.com/onDemocracy",
+		x: "https://x.com/onDemocracy",
 		github: "https://github.com/morinokami/taxonomy-restart",
 	},
 };
