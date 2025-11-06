@@ -34,6 +34,24 @@ const posts = defineCollection({
 	},
 });
 
+const pages = defineCollection({
+	name: "pages",
+	directory: "content/pages",
+	include: "**/*.md",
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		slug: z.string(),
+	}),
+	transform: async (document, context) => {
+		const mdx = await compileMDX(context, document);
+		return {
+			...document,
+			mdx,
+		};
+	},
+});
+
 export default defineConfig({
-	collections: [authors, posts],
+	collections: [authors, posts, pages],
 });

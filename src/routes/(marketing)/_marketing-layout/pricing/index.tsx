@@ -4,7 +4,7 @@ import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/pricing/")({
+export const Route = createFileRoute("/(marketing)/_marketing-layout/pricing/")({
 	component: PricingPage,
 	head: () => ({
 		meta: [
@@ -72,5 +72,5 @@ function PricingPage() {
 				</p>
 			</div>
 		</section>
-	);
+	)
 }

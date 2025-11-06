@@ -9,122 +9,245 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as PricingIndexRouteImport } from './routes/pricing/index'
-import { Route as BlogIndexRouteImport } from './routes/blog/index'
-import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
+import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketing)/_marketing-layout'
+import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
+import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
+import { Route as marketingMarketingLayoutSlugRouteImport } from './routes/(marketing)/_marketing-layout/$slug'
+import { Route as marketingMarketingLayoutPricingIndexRouteImport } from './routes/(marketing)/_marketing-layout/pricing/index'
+import { Route as marketingMarketingLayoutBlogIndexRouteImport } from './routes/(marketing)/_marketing-layout/blog/index'
+import { Route as authAuthLayoutRegisterIndexRouteImport } from './routes/(auth)/_auth-layout/register/index'
+import { Route as authAuthLayoutLoginIndexRouteImport } from './routes/(auth)/_auth-layout/login/index'
+import { Route as marketingMarketingLayoutBlogSlugRouteImport } from './routes/(marketing)/_marketing-layout/blog/$slug'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const marketingMarketingLayoutRoute =
+  marketingMarketingLayoutRouteImport.update({
+    id: '/(marketing)/_marketing-layout',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const authAuthLayoutRoute = authAuthLayoutRouteImport.update({
+  id: '/(auth)/_auth-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingIndexRoute = PricingIndexRouteImport.update({
-  id: '/pricing/',
-  path: '/pricing/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/blog/',
-  path: '/blog/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/blog/$slug',
-  path: '/blog/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const marketingMarketingLayoutIndexRoute =
+  marketingMarketingLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => marketingMarketingLayoutRoute,
+  } as any)
+const marketingMarketingLayoutSlugRoute =
+  marketingMarketingLayoutSlugRouteImport.update({
+    id: '/$slug',
+    path: '/$slug',
+    getParentRoute: () => marketingMarketingLayoutRoute,
+  } as any)
+const marketingMarketingLayoutPricingIndexRoute =
+  marketingMarketingLayoutPricingIndexRouteImport.update({
+    id: '/pricing/',
+    path: '/pricing/',
+    getParentRoute: () => marketingMarketingLayoutRoute,
+  } as any)
+const marketingMarketingLayoutBlogIndexRoute =
+  marketingMarketingLayoutBlogIndexRouteImport.update({
+    id: '/blog/',
+    path: '/blog/',
+    getParentRoute: () => marketingMarketingLayoutRoute,
+  } as any)
+const authAuthLayoutRegisterIndexRoute =
+  authAuthLayoutRegisterIndexRouteImport.update({
+    id: '/register/',
+    path: '/register/',
+    getParentRoute: () => authAuthLayoutRoute,
+  } as any)
+const authAuthLayoutLoginIndexRoute =
+  authAuthLayoutLoginIndexRouteImport.update({
+    id: '/login/',
+    path: '/login/',
+    getParentRoute: () => authAuthLayoutRoute,
+  } as any)
+const marketingMarketingLayoutBlogSlugRoute =
+  marketingMarketingLayoutBlogSlugRouteImport.update({
+    id: '/blog/$slug',
+    path: '/blog/$slug',
+    getParentRoute: () => marketingMarketingLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/blog': typeof BlogIndexRoute
-  '/pricing': typeof PricingIndexRoute
+  '/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/': typeof marketingMarketingLayoutIndexRoute
+  '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
+  '/login': typeof authAuthLayoutLoginIndexRoute
+  '/register': typeof authAuthLayoutRegisterIndexRoute
+  '/blog': typeof marketingMarketingLayoutBlogIndexRoute
+  '/pricing': typeof marketingMarketingLayoutPricingIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/blog': typeof BlogIndexRoute
-  '/pricing': typeof PricingIndexRoute
+  '/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/': typeof marketingMarketingLayoutIndexRoute
+  '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
+  '/login': typeof authAuthLayoutLoginIndexRoute
+  '/register': typeof authAuthLayoutRegisterIndexRoute
+  '/blog': typeof marketingMarketingLayoutBlogIndexRoute
+  '/pricing': typeof marketingMarketingLayoutPricingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/blog/': typeof BlogIndexRoute
-  '/pricing/': typeof PricingIndexRoute
+  '/(auth)/_auth-layout': typeof authAuthLayoutRouteWithChildren
+  '/(marketing)/_marketing-layout': typeof marketingMarketingLayoutRouteWithChildren
+  '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
+  '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
+  '/(auth)/_auth-layout/login/': typeof authAuthLayoutLoginIndexRoute
+  '/(auth)/_auth-layout/register/': typeof authAuthLayoutRegisterIndexRoute
+  '/(marketing)/_marketing-layout/blog/': typeof marketingMarketingLayoutBlogIndexRoute
+  '/(marketing)/_marketing-layout/pricing/': typeof marketingMarketingLayoutPricingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/blog/$slug' | '/blog' | '/pricing'
+  fullPaths:
+    | '/$slug'
+    | '/'
+    | '/blog/$slug'
+    | '/login'
+    | '/register'
+    | '/blog'
+    | '/pricing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/blog/$slug' | '/blog' | '/pricing'
-  id: '__root__' | '/' | '/login' | '/blog/$slug' | '/blog/' | '/pricing/'
+  to:
+    | '/$slug'
+    | '/'
+    | '/blog/$slug'
+    | '/login'
+    | '/register'
+    | '/blog'
+    | '/pricing'
+  id:
+    | '__root__'
+    | '/(auth)/_auth-layout'
+    | '/(marketing)/_marketing-layout'
+    | '/(marketing)/_marketing-layout/$slug'
+    | '/(marketing)/_marketing-layout/'
+    | '/(marketing)/_marketing-layout/blog/$slug'
+    | '/(auth)/_auth-layout/login/'
+    | '/(auth)/_auth-layout/register/'
+    | '/(marketing)/_marketing-layout/blog/'
+    | '/(marketing)/_marketing-layout/pricing/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  LoginRoute: typeof LoginRoute
-  BlogSlugRoute: typeof BlogSlugRoute
-  BlogIndexRoute: typeof BlogIndexRoute
-  PricingIndexRoute: typeof PricingIndexRoute
+  authAuthLayoutRoute: typeof authAuthLayoutRouteWithChildren
+  marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
+    '/(marketing)/_marketing-layout': {
+      id: '/(marketing)/_marketing-layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof marketingMarketingLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/(auth)/_auth-layout': {
+      id: '/(auth)/_auth-layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof authAuthLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(marketing)/_marketing-layout/': {
+      id: '/(marketing)/_marketing-layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof marketingMarketingLayoutIndexRouteImport
+      parentRoute: typeof marketingMarketingLayoutRoute
     }
-    '/pricing/': {
-      id: '/pricing/'
+    '/(marketing)/_marketing-layout/$slug': {
+      id: '/(marketing)/_marketing-layout/$slug'
+      path: '/$slug'
+      fullPath: '/$slug'
+      preLoaderRoute: typeof marketingMarketingLayoutSlugRouteImport
+      parentRoute: typeof marketingMarketingLayoutRoute
+    }
+    '/(marketing)/_marketing-layout/pricing/': {
+      id: '/(marketing)/_marketing-layout/pricing/'
       path: '/pricing'
       fullPath: '/pricing'
-      preLoaderRoute: typeof PricingIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof marketingMarketingLayoutPricingIndexRouteImport
+      parentRoute: typeof marketingMarketingLayoutRoute
     }
-    '/blog/': {
-      id: '/blog/'
+    '/(marketing)/_marketing-layout/blog/': {
+      id: '/(marketing)/_marketing-layout/blog/'
       path: '/blog'
       fullPath: '/blog'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof marketingMarketingLayoutBlogIndexRouteImport
+      parentRoute: typeof marketingMarketingLayoutRoute
     }
-    '/blog/$slug': {
-      id: '/blog/$slug'
+    '/(auth)/_auth-layout/register/': {
+      id: '/(auth)/_auth-layout/register/'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof authAuthLayoutRegisterIndexRouteImport
+      parentRoute: typeof authAuthLayoutRoute
+    }
+    '/(auth)/_auth-layout/login/': {
+      id: '/(auth)/_auth-layout/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authAuthLayoutLoginIndexRouteImport
+      parentRoute: typeof authAuthLayoutRoute
+    }
+    '/(marketing)/_marketing-layout/blog/$slug': {
+      id: '/(marketing)/_marketing-layout/blog/$slug'
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof marketingMarketingLayoutBlogSlugRouteImport
+      parentRoute: typeof marketingMarketingLayoutRoute
     }
   }
 }
 
+interface authAuthLayoutRouteChildren {
+  authAuthLayoutLoginIndexRoute: typeof authAuthLayoutLoginIndexRoute
+  authAuthLayoutRegisterIndexRoute: typeof authAuthLayoutRegisterIndexRoute
+}
+
+const authAuthLayoutRouteChildren: authAuthLayoutRouteChildren = {
+  authAuthLayoutLoginIndexRoute: authAuthLayoutLoginIndexRoute,
+  authAuthLayoutRegisterIndexRoute: authAuthLayoutRegisterIndexRoute,
+}
+
+const authAuthLayoutRouteWithChildren = authAuthLayoutRoute._addFileChildren(
+  authAuthLayoutRouteChildren,
+)
+
+interface marketingMarketingLayoutRouteChildren {
+  marketingMarketingLayoutSlugRoute: typeof marketingMarketingLayoutSlugRoute
+  marketingMarketingLayoutIndexRoute: typeof marketingMarketingLayoutIndexRoute
+  marketingMarketingLayoutBlogSlugRoute: typeof marketingMarketingLayoutBlogSlugRoute
+  marketingMarketingLayoutBlogIndexRoute: typeof marketingMarketingLayoutBlogIndexRoute
+  marketingMarketingLayoutPricingIndexRoute: typeof marketingMarketingLayoutPricingIndexRoute
+}
+
+const marketingMarketingLayoutRouteChildren: marketingMarketingLayoutRouteChildren =
+  {
+    marketingMarketingLayoutSlugRoute: marketingMarketingLayoutSlugRoute,
+    marketingMarketingLayoutIndexRoute: marketingMarketingLayoutIndexRoute,
+    marketingMarketingLayoutBlogSlugRoute:
+      marketingMarketingLayoutBlogSlugRoute,
+    marketingMarketingLayoutBlogIndexRoute:
+      marketingMarketingLayoutBlogIndexRoute,
+    marketingMarketingLayoutPricingIndexRoute:
+      marketingMarketingLayoutPricingIndexRoute,
+  }
+
+const marketingMarketingLayoutRouteWithChildren =
+  marketingMarketingLayoutRoute._addFileChildren(
+    marketingMarketingLayoutRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
-  BlogSlugRoute: BlogSlugRoute,
-  BlogIndexRoute: BlogIndexRoute,
-  PricingIndexRoute: PricingIndexRoute,
+  authAuthLayoutRoute: authAuthLayoutRouteWithChildren,
+  marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -6,8 +6,10 @@ import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { cn, formatDate } from "@/lib/utils";
 
-export const Route = createFileRoute("/blog/$slug")({
-	component: RouteComponent,
+export const Route = createFileRoute(
+	"/(marketing)/_marketing-layout/blog/$slug",
+)({
+	component: BlogPostPage,
 	// TODO: Add head
 	loader: async ({ params }) => {
 		const post = allPosts.find((post) => post.slug === params.slug);
@@ -20,7 +22,7 @@ export const Route = createFileRoute("/blog/$slug")({
 	},
 });
 
-function RouteComponent() {
+function BlogPostPage() {
 	const post = Route.useLoaderData();
 	const authors = post.authors.map((author) =>
 		allAuthors.find(({ title }) => title === author),
