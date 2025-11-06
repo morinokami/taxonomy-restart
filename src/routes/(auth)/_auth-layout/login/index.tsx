@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
+import { UserAuthForm } from "@/components/user-auth-form";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(auth)/_auth-layout/login/")({
@@ -40,7 +42,7 @@ function LoginPage() {
 						Enter your email to sign in to your account
 					</p>
 				</div>
-				{/* TODO: <UserAuthForm /> */}
+				<UserAuthForm />
 				<p className="px-8 text-center text-muted-foreground text-sm">
 					<Link
 						to="/register"
