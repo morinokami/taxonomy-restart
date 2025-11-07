@@ -2,20 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
+import { getGithubStars } from "@/data/github";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/")({
 	component: IndexPage,
-	loader: async () => {
-		// TODO:
-		return {
-			stars: 666,
-		};
-	},
+	loader: () => getGithubStars(),
 });
 
 function IndexPage() {
-	const { stars } = Route.useLoaderData();
+	const stars = Route.useLoaderData();
 
 	return (
 		<>
