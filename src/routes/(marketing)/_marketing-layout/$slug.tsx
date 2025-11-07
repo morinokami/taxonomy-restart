@@ -1,6 +1,7 @@
-import { MDXContent } from "@content-collections/mdx/react";
 import { createFileRoute, notFound } from "@tanstack/react-router";
+
 import { allPages } from "content-collections";
+import { Mdx } from "@/components/mdx-components";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/$slug")({
 	component: PagePage,
@@ -30,8 +31,7 @@ function PagePage() {
 				)}
 			</div>
 			<hr className="my-4" />
-			{/* TODO: Add styles to the MDX content */}
-			<MDXContent code={page.mdx} />
+			<Mdx code={page.mdx} />
 		</article>
 	);
 }

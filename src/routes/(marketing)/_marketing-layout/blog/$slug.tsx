@@ -1,8 +1,8 @@
-import { MDXContent } from "@content-collections/mdx/react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
 import { allAuthors, allPosts } from "content-collections";
 import { Icons } from "@/components/icons";
+import { Mdx } from "@/components/mdx-components";
 import { buttonVariants } from "@/components/ui/button";
 import { cn, formatDate } from "@/lib/utils";
 
@@ -84,13 +84,10 @@ function BlogPostPage() {
 				<img
 					src={post.image}
 					alt={post.title}
-					width={720}
-					height={405}
 					className="my-8 rounded-md border bg-muted transition-colors"
 				/>
 			)}
-			{/* TODO: Add styles to the MDX content */}
-			<MDXContent code={post.mdx} />
+			<Mdx code={post.mdx} />
 			<hr className="mt-12" />
 			<div className="flex justify-center py-6 lg:py-10">
 				<Link to="/blog" className={cn(buttonVariants({ variant: "ghost" }))}>
