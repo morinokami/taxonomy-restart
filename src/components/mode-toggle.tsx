@@ -6,8 +6,11 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useTheme } from "./theme-provider";
 
 export function ModeToggle() {
+	const { setTheme } = useTheme();
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -22,16 +25,15 @@ export function ModeToggle() {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				{/* TODO: Add logic to toggle theme */}
-				<DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setTheme("light")}>
 					<Icons.sun className="mr-2 h-4 w-4" />
 					<span>Light</span>
 				</DropdownMenuItem>
-				<DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setTheme("dark")}>
 					<Icons.moon className="mr-2 h-4 w-4" />
 					<span>Dark</span>
 				</DropdownMenuItem>
-				<DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setTheme("system")}>
 					<Icons.laptop className="mr-2 h-4 w-4" />
 					<span>System</span>
 				</DropdownMenuItem>
