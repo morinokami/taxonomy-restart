@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketing)/_marketing-layout'
 import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
 import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
@@ -19,6 +20,11 @@ import { Route as authAuthLayoutRegisterIndexRouteImport } from './routes/(auth)
 import { Route as authAuthLayoutLoginIndexRouteImport } from './routes/(auth)/_auth-layout/login/index'
 import { Route as marketingMarketingLayoutBlogSlugRouteImport } from './routes/(marketing)/_marketing-layout/blog/$slug'
 
+const ApiOgRoute = ApiOgRouteImport.update({
+  id: '/api/og',
+  path: '/api/og',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const marketingMarketingLayoutRoute =
   marketingMarketingLayoutRouteImport.update({
     id: '/(marketing)/_marketing-layout',
@@ -72,6 +78,7 @@ const marketingMarketingLayoutBlogSlugRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/api/og': typeof ApiOgRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof marketingMarketingLayoutPricingIndexRoute
 }
 export interface FileRoutesByTo {
+  '/api/og': typeof ApiOgRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)/_auth-layout': typeof authAuthLayoutRouteWithChildren
   '/(marketing)/_marketing-layout': typeof marketingMarketingLayoutRouteWithChildren
+  '/api/og': typeof ApiOgRoute
   '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
   '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
   '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -104,6 +113,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/api/og'
     | '/$slug'
     | '/'
     | '/blog/$slug'
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/pricing'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/api/og'
     | '/$slug'
     | '/'
     | '/blog/$slug'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/(auth)/_auth-layout'
     | '/(marketing)/_marketing-layout'
+    | '/api/og'
     | '/(marketing)/_marketing-layout/$slug'
     | '/(marketing)/_marketing-layout/'
     | '/(marketing)/_marketing-layout/blog/$slug'
@@ -136,10 +148,18 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   authAuthLayoutRoute: typeof authAuthLayoutRouteWithChildren
   marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
+  ApiOgRoute: typeof ApiOgRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/api/og': {
+      id: '/api/og'
+      path: '/api/og'
+      fullPath: '/api/og'
+      preLoaderRoute: typeof ApiOgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(marketing)/_marketing-layout': {
       id: '/(marketing)/_marketing-layout'
       path: ''
@@ -248,6 +268,7 @@ const marketingMarketingLayoutRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   authAuthLayoutRoute: authAuthLayoutRouteWithChildren,
   marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
+  ApiOgRoute: ApiOgRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

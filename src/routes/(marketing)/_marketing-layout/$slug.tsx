@@ -2,10 +2,11 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { allPages } from "content-collections";
 import { Mdx } from "@/components/mdx-components";
+import { siteConfig } from "@/config/site";
+import { absoluteUrl } from "@/lib/utils";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/$slug")({
 	component: PagePage,
-	// TODO: Add head
 	loader: async ({ params }) => {
 		const page = allPages.find((page) => page.slug === params.slug);
 
@@ -14,6 +15,68 @@ export const Route = createFileRoute("/(marketing)/_marketing-layout/$slug")({
 		}
 
 		return page;
+	},
+	head: ({ params }) => {
+		const page = allPages.find((page) => page.slug === params.slug);
+
+		if (!page) {
+			return {};
+		}
+
+		const url = import.meta.env.VITE_APP_URL;
+
+		const ogUrl = new URL(`${url}/api/og`);
+		ogUrl.searchParams.set("heading", page.title);
+		ogUrl.searchParams.set("type", siteConfig.name);
+		ogUrl.searchParams.set("mode", "light");
+
+		return {
+			meta: [
+				{
+					title: `${page.title} | ${siteConfig.name}`,
+				},
+				{
+					name: "description",
+					content: page.description,
+				},
+				{
+					name: "og:title",
+					content: page.title,
+				},
+				{
+					name: "og:description",
+					content: page.description,
+				},
+				{
+					name: "og:type",
+					content: "article",
+				},
+				{
+					name: "og:url",
+					content: absoluteUrl(`/${page.slug}`),
+				},
+				{
+					name: "og:image",
+					content: ogUrl.toString(),
+				},
+				{
+					name: "twitter:card",
+					content: "summary_large_image",
+				},
+				{
+					name: "twitter:title",
+					content: page.title,
+				},
+				{
+					name: "twitter:description",
+					content: page.description,
+				},
+				{
+					name: "twitter:image",
+					content: ogUrl.toString(),
+				},
+			],
+		};
 	},
 });
 

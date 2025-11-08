@@ -8,17 +8,17 @@ import rehypePrettyCode, {
 } from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
-import { z } from "zod";
+import * as v from "valibot";
 
 const authors = defineCollection({
 	name: "authors",
 	directory: "content/authors",
 	include: "**/*.md",
-	schema: z.object({
-		title: z.string(),
-		avatar: z.string(),
-		x: z.string(),
-		content: z.string(),
+	schema: v.object({
+		title: v.string(),
+		avatar: v.string(),
+		x: v.string(),
+		content: v.string(),
 	}),
 });
 
@@ -26,14 +26,14 @@ const posts = defineCollection({
 	name: "posts",
 	directory: "content/blog",
 	include: "**/*.mdx",
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		image: z.string(),
-		date: z.string(),
-		authors: z.array(z.string()),
-		slug: z.string(),
-		content: z.string(),
+	schema: v.object({
+		title: v.string(),
+		description: v.string(),
+		image: v.string(),
+		date: v.string(),
+		authors: v.array(v.string()),
+		slug: v.string(),
+		content: v.string(),
 	}),
 	transform: async (document, context) => {
 		const mdx = await compileMDX(context, document, {
@@ -81,11 +81,11 @@ const pages = defineCollection({
 	name: "pages",
 	directory: "content/pages",
 	include: "**/*.md",
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		slug: z.string(),
-		content: z.string(),
+	schema: v.object({
+		title: v.string(),
+		description: v.string(),
+		slug: v.string(),
+		content: v.string(),
 	}),
 	transform: async (document, context) => {
 		const mdx = await compileMDX(context, document);

@@ -4,13 +4,12 @@ import { allAuthors, allPosts } from "content-collections";
 import { Icons } from "@/components/icons";
 import { Mdx } from "@/components/mdx-components";
 import { buttonVariants } from "@/components/ui/button";
-import { cn, formatDate } from "@/lib/utils";
+import { absoluteUrl, cn, formatDate } from "@/lib/utils";
 
 export const Route = createFileRoute(
 	"/(marketing)/_marketing-layout/blog/$slug",
 )({
 	component: BlogPostPage,
-	// TODO: Add head
 	loader: async ({ params }) => {
 		const post = allPosts.find((post) => post.slug === params.slug);
 
@@ -19,6 +18,72 @@ export const Route = createFileRoute(
 		}
 
 		return post;
+	},
+	head: ({ params }) => {
+		const post = allPosts.find((post) => post.slug === params.slug);
+
+		if (!post) {
+			return {};
+		}
+
+		const url = import.meta.env.VITE_APP_URL;
+
+		const ogUrl = new URL(`${url}/api/og`);
+		ogUrl.searchParams.set("heading", post.title);
+		ogUrl.searchParams.set("type", "Blog Post");
+		ogUrl.searchParams.set("mode", "dark");
+
+		return {
+			meta: [
+				{
+					title: `${post.title} | Taxonomy Restart`,
+				},
+				{
+					name: "description",
+					content: post.description,
+				},
+				{
+					name: "author",
+					content: post.authors[0],
+				},
+				{
+					name: "og:title",
+					content: post.title,
+				},
+				{
+					name: "og:description",
+					content: post.description,
+				},
+				{
+					name: "og:type",
+					content: "article",
+				},
+				{
+					name: "og:url",
+					content: absoluteUrl(`/blog/${post.slug}`),
+				},
+				{
+					name: "og:image",
+					content: ogUrl.toString(),
+				},
+				{
+					name: "twitter:card",
+					content: "summary_large_image",
+				},
+				{
+					name: "twitter:title",
+					content: post.title,
+				},
+				{
+					name: "twitter:description",
+					content: post.description,
+				},
+				{
+					name: "twitter:image",
+					content: ogUrl.toString(),
+				},
+			],
+		};
 	},
 });
 
