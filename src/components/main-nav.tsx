@@ -3,10 +3,9 @@ import { useState } from "react";
 import type { MainNavItem } from "types";
 
 import { Icons } from "@/components/icons";
+import { MobileNav } from "@/components/mobile-nav";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-
-// import { MobileNav } from "./components/mobile-nav";
 
 interface MainNavProps {
 	items?: MainNavItem[];
@@ -48,9 +47,9 @@ export function MainNav({ items, children }: MainNavProps) {
 				{showMobileMenu ? <Icons.close /> : <Icons.logo />}
 				<span className="font-bold">Menu</span>
 			</button>
-			{/* {showMobileMenu && items && (
+			{showMobileMenu && items && (
 				<MobileNav items={items}>{children}</MobileNav>
-			)} */}
+			)}
 		</div>
 	);
 }
