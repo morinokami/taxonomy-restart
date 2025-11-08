@@ -13,6 +13,7 @@ import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketing)/_marketing-layout'
 import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
 import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
+import { Route as ApiAuthCallbackRouteImport } from './routes/api/auth/callback'
 import { Route as marketingMarketingLayoutSlugRouteImport } from './routes/(marketing)/_marketing-layout/$slug'
 import { Route as marketingMarketingLayoutPricingIndexRouteImport } from './routes/(marketing)/_marketing-layout/pricing/index'
 import { Route as marketingMarketingLayoutBlogIndexRouteImport } from './routes/(marketing)/_marketing-layout/blog/index'
@@ -40,6 +41,11 @@ const marketingMarketingLayoutIndexRoute =
     path: '/',
     getParentRoute: () => marketingMarketingLayoutRoute,
   } as any)
+const ApiAuthCallbackRoute = ApiAuthCallbackRouteImport.update({
+  id: '/api/auth/callback',
+  path: '/api/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const marketingMarketingLayoutSlugRoute =
   marketingMarketingLayoutSlugRouteImport.update({
     id: '/$slug',
@@ -80,6 +86,7 @@ const marketingMarketingLayoutBlogSlugRoute =
 export interface FileRoutesByFullPath {
   '/api/og': typeof ApiOgRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/api/auth/callback': typeof ApiAuthCallbackRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/api/og': typeof ApiOgRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/api/auth/callback': typeof ApiAuthCallbackRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/(marketing)/_marketing-layout': typeof marketingMarketingLayoutRouteWithChildren
   '/api/og': typeof ApiOgRoute
   '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/api/auth/callback': typeof ApiAuthCallbackRoute
   '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
   '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/(auth)/_auth-layout/login/': typeof authAuthLayoutLoginIndexRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/api/og'
     | '/$slug'
+    | '/api/auth/callback'
     | '/'
     | '/blog/$slug'
     | '/login'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
   to:
     | '/api/og'
     | '/$slug'
+    | '/api/auth/callback'
     | '/'
     | '/blog/$slug'
     | '/login'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/(marketing)/_marketing-layout'
     | '/api/og'
     | '/(marketing)/_marketing-layout/$slug'
+    | '/api/auth/callback'
     | '/(marketing)/_marketing-layout/'
     | '/(marketing)/_marketing-layout/blog/$slug'
     | '/(auth)/_auth-layout/login/'
@@ -149,6 +161,7 @@ export interface RootRouteChildren {
   authAuthLayoutRoute: typeof authAuthLayoutRouteWithChildren
   marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
   ApiOgRoute: typeof ApiOgRoute
+  ApiAuthCallbackRoute: typeof ApiAuthCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof marketingMarketingLayoutIndexRouteImport
       parentRoute: typeof marketingMarketingLayoutRoute
+    }
+    '/api/auth/callback': {
+      id: '/api/auth/callback'
+      path: '/api/auth/callback'
+      fullPath: '/api/auth/callback'
+      preLoaderRoute: typeof ApiAuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(marketing)/_marketing-layout/$slug': {
       id: '/(marketing)/_marketing-layout/$slug'
@@ -269,16 +289,18 @@ const rootRouteChildren: RootRouteChildren = {
   authAuthLayoutRoute: authAuthLayoutRouteWithChildren,
   marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
   ApiOgRoute: ApiOgRoute,
+  ApiAuthCallbackRoute: ApiAuthCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

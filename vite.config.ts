@@ -23,6 +23,10 @@ const config = defineConfig({
 			},
 		}),
 	],
+	// To fix the error "The requested module does not provide an export named 'parse'"
+	optimizeDeps: {
+		include: ["cookie"],
+	},
 });
 
 export default config;
