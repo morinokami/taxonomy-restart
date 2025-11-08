@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 
-import type { MainNavItem } from "types";
 import { Icons } from "@/components/icons";
 import { siteConfig } from "@/config/site";
 import { useLockBody } from "@/hooks/use-lock-body";
 import { cn } from "@/lib/utils";
+import type { MainNavItem } from "@/types";
 
 interface MobileNavProps {
 	items: MainNavItem[];

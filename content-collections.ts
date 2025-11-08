@@ -12,7 +12,7 @@ import * as v from "valibot";
 
 const authors = defineCollection({
 	name: "authors",
-	directory: "content/authors",
+	directory: "src/content/authors",
 	include: "**/*.md",
 	schema: v.object({
 		title: v.string(),
@@ -24,7 +24,7 @@ const authors = defineCollection({
 
 const posts = defineCollection({
 	name: "posts",
-	directory: "content/blog",
+	directory: "src/content/blog",
 	include: "**/*.mdx",
 	schema: v.object({
 		title: v.string(),
@@ -79,7 +79,7 @@ const posts = defineCollection({
 
 const pages = defineCollection({
 	name: "pages",
-	directory: "content/pages",
+	directory: "src/content/pages",
 	include: "**/*.md",
 	schema: v.object({
 		title: v.string(),

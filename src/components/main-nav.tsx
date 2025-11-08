@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import type { MainNavItem } from "types";
 
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import type { MainNavItem } from "@/types";
 
 interface MainNavProps {
 	items?: MainNavItem[];

@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ImageResponse } from "@vercel/og";
 import * as v from "valibot";
-
+import { absoluteUrl } from "@/lib/utils";
 import { ogImageSchema } from "@/lib/validations/og";
 
-const interRegular = fetch(
-	new URL("../../../assets/fonts/Inter-Regular.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
+const interRegular = fetch(absoluteUrl("/fonts/Inter-Regular.ttf")).then(
+	(res) => res.arrayBuffer(),
+);
 
-const interBold = fetch(
-	new URL("../../../assets/fonts/CalSans-SemiBold.ttf", import.meta.url),
-).then((res) => res.arrayBuffer());
+const interBold = fetch(absoluteUrl("/fonts/CalSans-SemiBold.ttf")).then(
+	(res) => res.arrayBuffer(),
+);
 
 export const Route = createFileRoute("/api/og")({
 	server: {
