@@ -1,7 +1,7 @@
+import { ClerkProvider } from "@clerk/tanstack-react-start";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { AuthKitProvider } from "@workos/authkit-tanstack-react-start/client";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import appCss from "@/styles.css?url";
@@ -38,7 +38,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="min-h-screen bg-background font-sans antialiased">
-				<AuthKitProvider>
+				<ClerkProvider>
 					<ThemeProvider>{children}</ThemeProvider>
 					<TanStackDevtools
 						config={{
@@ -52,7 +52,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						]}
 					/>
 					<Scripts />
-				</AuthKitProvider>
+				</ClerkProvider>
 			</body>
 		</html>
 	);
