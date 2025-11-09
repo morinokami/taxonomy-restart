@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@clerk/themes/shadcn.css";
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
 @import "@fontsource/cal-sans";

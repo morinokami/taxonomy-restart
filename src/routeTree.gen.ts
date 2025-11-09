@@ -8,18 +8,31 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketing)/_marketing-layout'
 import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
 import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
 import { Route as marketingMarketingLayoutSlugRouteImport } from './routes/(marketing)/_marketing-layout/$slug'
+import { Route as dashboardDashboardDashboardLayoutRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout'
 import { Route as marketingMarketingLayoutPricingIndexRouteImport } from './routes/(marketing)/_marketing-layout/pricing/index'
 import { Route as marketingMarketingLayoutBlogIndexRouteImport } from './routes/(marketing)/_marketing-layout/blog/index'
+import { Route as dashboardDashboardDashboardLayoutIndexRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout/index'
 import { Route as authAuthLayoutRegisterIndexRouteImport } from './routes/(auth)/_auth-layout/register/index'
 import { Route as authAuthLayoutLoginIndexRouteImport } from './routes/(auth)/_auth-layout/login/index'
 import { Route as marketingMarketingLayoutBlogSlugRouteImport } from './routes/(marketing)/_marketing-layout/blog/$slug'
 
+const dashboardDashboardRouteImport = createFileRoute(
+  '/(dashboard)/dashboard',
+)()
+
+const dashboardDashboardRoute = dashboardDashboardRouteImport.update({
+  id: '/(dashboard)/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiOgRoute = ApiOgRouteImport.update({
   id: '/api/og',
   path: '/api/og',
@@ -46,6 +59,11 @@ const marketingMarketingLayoutSlugRoute =
     path: '/$slug',
     getParentRoute: () => marketingMarketingLayoutRoute,
   } as any)
+const dashboardDashboardDashboardLayoutRoute =
+  dashboardDashboardDashboardLayoutRouteImport.update({
+    id: '/_dashboard-layout',
+    getParentRoute: () => dashboardDashboardRoute,
+  } as any)
 const marketingMarketingLayoutPricingIndexRoute =
   marketingMarketingLayoutPricingIndexRouteImport.update({
     id: '/pricing/',
@@ -57,6 +75,12 @@ const marketingMarketingLayoutBlogIndexRoute =
     id: '/blog/',
     path: '/blog/',
     getParentRoute: () => marketingMarketingLayoutRoute,
+  } as any)
+const dashboardDashboardDashboardLayoutIndexRoute =
+  dashboardDashboardDashboardLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => dashboardDashboardDashboardLayoutRoute,
   } as any)
 const authAuthLayoutRegisterIndexRoute =
   authAuthLayoutRegisterIndexRouteImport.update({
@@ -79,16 +103,19 @@ const marketingMarketingLayoutBlogSlugRoute =
 
 export interface FileRoutesByFullPath {
   '/api/og': typeof ApiOgRoute
+  '/dashboard': typeof dashboardDashboardDashboardLayoutRouteWithChildren
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
   '/register': typeof authAuthLayoutRegisterIndexRoute
+  '/dashboard/': typeof dashboardDashboardDashboardLayoutIndexRoute
   '/blog': typeof marketingMarketingLayoutBlogIndexRoute
   '/pricing': typeof marketingMarketingLayoutPricingIndexRoute
 }
 export interface FileRoutesByTo {
   '/api/og': typeof ApiOgRoute
+  '/dashboard': typeof dashboardDashboardDashboardLayoutIndexRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -102,11 +129,14 @@ export interface FileRoutesById {
   '/(auth)/_auth-layout': typeof authAuthLayoutRouteWithChildren
   '/(marketing)/_marketing-layout': typeof marketingMarketingLayoutRouteWithChildren
   '/api/og': typeof ApiOgRoute
+  '/(dashboard)/dashboard': typeof dashboardDashboardRouteWithChildren
+  '/(dashboard)/dashboard/_dashboard-layout': typeof dashboardDashboardDashboardLayoutRouteWithChildren
   '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
   '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
   '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/(auth)/_auth-layout/login/': typeof authAuthLayoutLoginIndexRoute
   '/(auth)/_auth-layout/register/': typeof authAuthLayoutRegisterIndexRoute
+  '/(dashboard)/dashboard/_dashboard-layout/': typeof dashboardDashboardDashboardLayoutIndexRoute
   '/(marketing)/_marketing-layout/blog/': typeof marketingMarketingLayoutBlogIndexRoute
   '/(marketing)/_marketing-layout/pricing/': typeof marketingMarketingLayoutPricingIndexRoute
 }
@@ -114,16 +144,19 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/api/og'
+    | '/dashboard'
     | '/$slug'
     | '/'
     | '/blog/$slug'
     | '/login'
     | '/register'
+    | '/dashboard/'
     | '/blog'
     | '/pricing'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/api/og'
+    | '/dashboard'
     | '/$slug'
     | '/'
     | '/blog/$slug'
@@ -136,11 +169,14 @@ export interface FileRouteTypes {
     | '/(auth)/_auth-layout'
     | '/(marketing)/_marketing-layout'
     | '/api/og'
+    | '/(dashboard)/dashboard'
+    | '/(dashboard)/dashboard/_dashboard-layout'
     | '/(marketing)/_marketing-layout/$slug'
     | '/(marketing)/_marketing-layout/'
     | '/(marketing)/_marketing-layout/blog/$slug'
     | '/(auth)/_auth-layout/login/'
     | '/(auth)/_auth-layout/register/'
+    | '/(dashboard)/dashboard/_dashboard-layout/'
     | '/(marketing)/_marketing-layout/blog/'
     | '/(marketing)/_marketing-layout/pricing/'
   fileRoutesById: FileRoutesById
@@ -149,10 +185,18 @@ export interface RootRouteChildren {
   authAuthLayoutRoute: typeof authAuthLayoutRouteWithChildren
   marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
   ApiOgRoute: typeof ApiOgRoute
+  dashboardDashboardRoute: typeof dashboardDashboardRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(dashboard)/dashboard': {
+      id: '/(dashboard)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof dashboardDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/og': {
       id: '/api/og'
       path: '/api/og'
@@ -188,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof marketingMarketingLayoutSlugRouteImport
       parentRoute: typeof marketingMarketingLayoutRoute
     }
+    '/(dashboard)/dashboard/_dashboard-layout': {
+      id: '/(dashboard)/dashboard/_dashboard-layout'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof dashboardDashboardDashboardLayoutRouteImport
+      parentRoute: typeof dashboardDashboardRoute
+    }
     '/(marketing)/_marketing-layout/pricing/': {
       id: '/(marketing)/_marketing-layout/pricing/'
       path: '/pricing'
@@ -201,6 +252,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog'
       preLoaderRoute: typeof marketingMarketingLayoutBlogIndexRouteImport
       parentRoute: typeof marketingMarketingLayoutRoute
+    }
+    '/(dashboard)/dashboard/_dashboard-layout/': {
+      id: '/(dashboard)/dashboard/_dashboard-layout/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof dashboardDashboardDashboardLayoutIndexRouteImport
+      parentRoute: typeof dashboardDashboardDashboardLayoutRoute
     }
     '/(auth)/_auth-layout/register/': {
       id: '/(auth)/_auth-layout/register/'
@@ -265,10 +323,38 @@ const marketingMarketingLayoutRouteWithChildren =
     marketingMarketingLayoutRouteChildren,
   )
 
+interface dashboardDashboardDashboardLayoutRouteChildren {
+  dashboardDashboardDashboardLayoutIndexRoute: typeof dashboardDashboardDashboardLayoutIndexRoute
+}
+
+const dashboardDashboardDashboardLayoutRouteChildren: dashboardDashboardDashboardLayoutRouteChildren =
+  {
+    dashboardDashboardDashboardLayoutIndexRoute:
+      dashboardDashboardDashboardLayoutIndexRoute,
+  }
+
+const dashboardDashboardDashboardLayoutRouteWithChildren =
+  dashboardDashboardDashboardLayoutRoute._addFileChildren(
+    dashboardDashboardDashboardLayoutRouteChildren,
+  )
+
+interface dashboardDashboardRouteChildren {
+  dashboardDashboardDashboardLayoutRoute: typeof dashboardDashboardDashboardLayoutRouteWithChildren
+}
+
+const dashboardDashboardRouteChildren: dashboardDashboardRouteChildren = {
+  dashboardDashboardDashboardLayoutRoute:
+    dashboardDashboardDashboardLayoutRouteWithChildren,
+}
+
+const dashboardDashboardRouteWithChildren =
+  dashboardDashboardRoute._addFileChildren(dashboardDashboardRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   authAuthLayoutRoute: authAuthLayoutRouteWithChildren,
   marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
   ApiOgRoute: ApiOgRoute,
+  dashboardDashboardRoute: dashboardDashboardRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
