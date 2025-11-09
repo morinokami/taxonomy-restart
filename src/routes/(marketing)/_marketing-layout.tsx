@@ -1,3 +1,4 @@
+import { SignedOut } from "@clerk/tanstack-react-start";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 
 import { MainNav } from "@/components/main-nav";
@@ -17,15 +18,17 @@ function MarketingLayout() {
 				<div className="flex h-20 items-center justify-between py-6">
 					<MainNav items={marketingConfig.mainNav} />
 					<nav>
-						<Link
-							to="/login"
-							className={cn(
-								buttonVariants({ variant: "secondary", size: "sm" }),
-								"px-4",
-							)}
-						>
-							Login
-						</Link>
+						<SignedOut>
+							<Link
+								to="/login"
+								className={cn(
+									buttonVariants({ variant: "secondary", size: "sm" }),
+									"px-4",
+								)}
+							>
+								Login
+							</Link>
+						</SignedOut>
 					</nav>
 				</div>
 			</header>

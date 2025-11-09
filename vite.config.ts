@@ -23,6 +23,19 @@ const config = defineConfig({
 			},
 		}),
 	],
+	// To fix the error "The requested module does not provide an export named 'parse'"
+	optimizeDeps: {
+		include: ["cookie"],
+	},
+	// https://github.com/adobe/react-spectrum/issues/6694
+	resolve: {
+		alias: [
+			{
+				find: "use-sync-external-store/shim/index.js",
+				replacement: "react",
+			},
+		],
+	},
 });
 
 export default config;
