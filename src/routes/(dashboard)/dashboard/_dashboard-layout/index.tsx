@@ -12,6 +12,13 @@ export const Route = createFileRoute(
 		// TODO: Get user's posts from database
 		return [];
 	},
+	head: () => ({
+		meta: [
+			{
+				title: "Dashboard | Taxonomy Restart",
+			},
+		],
+	}),
 });
 
 function DashboardPage() {

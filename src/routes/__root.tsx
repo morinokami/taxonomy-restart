@@ -4,6 +4,7 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import appCss from "@/styles.css?url";
 
 export const Route = createRootRoute({
@@ -39,7 +40,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body className="min-h-screen bg-background font-sans antialiased">
 				<ClerkProvider>
-					<ThemeProvider>{children}</ThemeProvider>
+					<ThemeProvider>
+						{children}
+						<Toaster />
+					</ThemeProvider>
 					<TanStackDevtools
 						config={{
 							position: "bottom-left",

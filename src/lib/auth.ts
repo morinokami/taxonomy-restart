@@ -1,6 +1,8 @@
+import { createClerkClient } from "@clerk/backend";
 import { auth } from "@clerk/tanstack-react-start/server";
 import { redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import * as v from "valibot";
 
 export const authStateFn = createServerFn({ method: "GET" }).handler(
 	async () => {
@@ -15,3 +17,18 @@ export const authStateFn = createServerFn({ method: "GET" }).handler(
 		return { userId };
 	},
 );
+
+export const getUserName = createServerFn({ method: "GET" })
+	.inputValidator(v.object({ userId: v.string() }))
+	.handler(async ({ data }) => {
+		const clerkClient = createClerkClient({
+			secretKey: process.env.CLERK_SECRET_KEY,
+		});
+
+		const user = await clerkClient.users.getUser(data.userId);
+
+		return {
+			firstName: user.firstName,
+			lastName: user.lastName,
+		};
+	});
