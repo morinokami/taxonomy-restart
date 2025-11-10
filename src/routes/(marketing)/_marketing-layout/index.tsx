@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/")({
 	component: IndexPage,
-	loader: () => getGithubStars(),
+	loader: async () => await getGithubStars(),
 });
 
 function IndexPage() {
