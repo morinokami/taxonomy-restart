@@ -4,7 +4,7 @@ import { redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import * as v from "valibot";
 
-export const authStateFn = createServerFn({ method: "GET" }).handler(
+export const getAuthState = createServerFn({ method: "GET" }).handler(
 	async () => {
 		const { isAuthenticated, userId } = await auth();
 

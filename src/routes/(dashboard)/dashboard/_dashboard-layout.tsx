@@ -6,13 +6,13 @@ import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { UserAccountNav } from "@/components/user-account-nav";
 import { dashboardConfig } from "@/config/dashboard";
-import { authStateFn } from "@/lib/auth";
+import { getAuthState } from "@/lib/auth";
 
 export const Route = createFileRoute(
 	"/(dashboard)/dashboard/_dashboard-layout",
 )({
 	component: DashboardLayout,
-	beforeLoad: async () => await authStateFn(),
+	beforeLoad: async () => await getAuthState(),
 });
 
 function DashboardLayout() {
