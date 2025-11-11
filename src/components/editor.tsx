@@ -10,7 +10,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { toast } from "sonner";
 import * as v from "valibot";
 
-// TODO: import "@/styles/editor.css";
+import "@/styles/editor.css";
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { updatePost } from "@/lib/functions/posts";
