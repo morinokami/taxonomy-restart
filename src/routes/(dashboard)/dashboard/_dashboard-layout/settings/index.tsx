@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { UserNameForm } from "@/components/user-name-form";
-import { getUserName } from "@/lib/auth";
+import { getUserName } from "@/lib/functions/auth";
 
 export const Route = createFileRoute(
 	"/(dashboard)/dashboard/_dashboard-layout/settings/",

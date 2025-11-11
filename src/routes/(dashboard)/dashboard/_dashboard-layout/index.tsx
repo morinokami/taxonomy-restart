@@ -4,7 +4,7 @@ import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { EmptyPlaceholder } from "@/components/empty-placeholder";
 import { PostCreateButton } from "@/components/post-create-button";
-import { getPosts } from "@/lib/posts";
+import { getPosts } from "@/lib/functions/posts";
 
 export const Route = createFileRoute(
 	"/(dashboard)/dashboard/_dashboard-layout/",

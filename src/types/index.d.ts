@@ -58,3 +58,10 @@ export type UserSubscriptionPlan = SubscriptionPlan &
 		stripeCurrentPeriodEnd: number;
 		isPro: boolean;
 	};
+
+export type Result<T> =
+	| {
+			success: true;
+			data: T;
+	  }
+	| { success: false; error: string };

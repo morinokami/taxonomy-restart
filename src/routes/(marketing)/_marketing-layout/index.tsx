@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
-import { getGithubStars } from "@/lib/github";
+import { getGithubStars } from "@/lib/functions/github";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/")({

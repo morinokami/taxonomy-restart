@@ -6,7 +6,7 @@ import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { UserAccountNav } from "@/components/user-account-nav";
 import { dashboardConfig } from "@/config/dashboard";
-import { getAuthState } from "@/lib/auth";
+import { getAuthState } from "@/lib/functions/auth";
 
 export const Route = createFileRoute(
 	"/(dashboard)/dashboard/_dashboard-layout",

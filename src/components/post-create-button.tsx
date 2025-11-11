@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { Icons } from "@/components/icons";
 import { type ButtonProps, buttonVariants } from "@/components/ui/button";
-import { createPost } from "@/lib/posts";
+import { createPost } from "@/lib/functions/posts";
 import { cn } from "@/lib/utils";
 
 interface PostCreateButtonProps extends ButtonProps {}
@@ -24,8 +24,8 @@ export function PostCreateButton({
 
 		setIsLoading(false);
 
-		if (!response?.ok) {
-			if (response?.status === 402) {
+		if (!response.success) {
+			if (response.error === "Unauthorized") {
 				return toast.error("Limit of 3 posts reached.", {
 					description: "Please upgrade to the PRO plan.",
 				});
@@ -36,7 +36,7 @@ export function PostCreateButton({
 			});
 		}
 
-		const post = await response.json();
+		const post = response.data;
 
 		// This forces a cache invalidation.
 		// router.refresh();
