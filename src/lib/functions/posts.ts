@@ -1,7 +1,8 @@
 import { auth } from "@clerk/tanstack-react-start/server";
+import { notFound, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-
 import type { Prisma } from "generated/prisma/client";
+
 import * as v from "valibot";
 import prisma from "@/lib/prisma";
 import type { Result } from "@/types";
@@ -107,4 +108,60 @@ export const deletePost = createServerFn({ method: "POST" })
 		} catch (_) {
 			return false;
 		}
+	});
+
+export const updatePost = createServerFn({ method: "POST" })
+	.inputValidator(
+		v.object({ postId: v.string(), title: v.string(), content: v.any() }),
+	)
+	.handler(async ({ data }) => {
+		try {
+			const { userId } = await auth();
+
+			const count = await prisma.post.count({
+				where: {
+					id: data.postId,
+					authorId: userId ?? "",
+				},
+			});
+
+			if (count === 0) {
+				return false;
+			}
+
+			// TODO: Implement sanitization for content
+			await prisma.post.update({
+				where: {
+					id: data.postId,
+				},
+				data: {
+					title: data.title,
+					content: data.content,
+				},
+			});
+
+			return true;
+		} catch (_) {
+			return false;
+		}
+	});
+
+export const getPostForUser = createServerFn({ method: "GET" })
+	.inputValidator(v.object({ postId: v.string() }))
+	.handler(async ({ data }) => {
+		const { isAuthenticated, userId } = await auth();
+
+		if (!isAuthenticated) {
+			throw redirect({ to: "/login" });
+		}
+
+		const post = await prisma.post.findUnique({
+			where: { id: data.postId, authorId: userId },
+		});
+
+		if (!post) {
+			throw notFound();
+		}
+
+		return post;
 	});

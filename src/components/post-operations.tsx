@@ -41,7 +41,11 @@ export function PostOperations({ post }: PostOperationsProps) {
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
 					<DropdownMenuItem>
-						<Link to={`/editor/${post.id}`} className="flex w-full">
+						<Link
+							to="/editor/$postId"
+							params={{ postId: post.id }}
+							className="flex w-full"
+						>
 							Edit
 						</Link>
 					</DropdownMenuItem>

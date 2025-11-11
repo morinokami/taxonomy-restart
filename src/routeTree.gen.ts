@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketing)/_marketing-layout'
+import { Route as editorEditorLayoutRouteImport } from './routes/(editor)/_editor-layout'
 import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
 import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
 import { Route as marketingMarketingLayoutSlugRouteImport } from './routes/(marketing)/_marketing-layout/$slug'
@@ -23,6 +24,7 @@ import { Route as dashboardDashboardDashboardLayoutIndexRouteImport } from './ro
 import { Route as authAuthLayoutRegisterIndexRouteImport } from './routes/(auth)/_auth-layout/register/index'
 import { Route as authAuthLayoutLoginIndexRouteImport } from './routes/(auth)/_auth-layout/login/index'
 import { Route as marketingMarketingLayoutBlogSlugRouteImport } from './routes/(marketing)/_marketing-layout/blog/$slug'
+import { Route as editorEditorLayoutEditorPostIdRouteImport } from './routes/(editor)/_editor-layout/editor/$postId'
 import { Route as dashboardDashboardDashboardLayoutSettingsIndexRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout/settings/index'
 import { Route as dashboardDashboardDashboardLayoutBillingIndexRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout/billing/index'
 
@@ -45,6 +47,10 @@ const marketingMarketingLayoutRoute =
     id: '/(marketing)/_marketing-layout',
     getParentRoute: () => rootRouteImport,
   } as any)
+const editorEditorLayoutRoute = editorEditorLayoutRouteImport.update({
+  id: '/(editor)/_editor-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const authAuthLayoutRoute = authAuthLayoutRouteImport.update({
   id: '/(auth)/_auth-layout',
   getParentRoute: () => rootRouteImport,
@@ -102,6 +108,12 @@ const marketingMarketingLayoutBlogSlugRoute =
     path: '/blog/$slug',
     getParentRoute: () => marketingMarketingLayoutRoute,
   } as any)
+const editorEditorLayoutEditorPostIdRoute =
+  editorEditorLayoutEditorPostIdRouteImport.update({
+    id: '/editor/$postId',
+    path: '/editor/$postId',
+    getParentRoute: () => editorEditorLayoutRoute,
+  } as any)
 const dashboardDashboardDashboardLayoutSettingsIndexRoute =
   dashboardDashboardDashboardLayoutSettingsIndexRouteImport.update({
     id: '/settings/',
@@ -120,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof dashboardDashboardDashboardLayoutRouteWithChildren
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/': typeof marketingMarketingLayoutIndexRoute
+  '/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
   '/register': typeof authAuthLayoutRegisterIndexRoute
@@ -134,6 +147,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof dashboardDashboardDashboardLayoutIndexRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/': typeof marketingMarketingLayoutIndexRoute
+  '/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
   '/register': typeof authAuthLayoutRegisterIndexRoute
@@ -145,12 +159,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)/_auth-layout': typeof authAuthLayoutRouteWithChildren
+  '/(editor)/_editor-layout': typeof editorEditorLayoutRouteWithChildren
   '/(marketing)/_marketing-layout': typeof marketingMarketingLayoutRouteWithChildren
   '/api/og': typeof ApiOgRoute
   '/(dashboard)/dashboard': typeof dashboardDashboardRouteWithChildren
   '/(dashboard)/dashboard/_dashboard-layout': typeof dashboardDashboardDashboardLayoutRouteWithChildren
   '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
   '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
+  '/(editor)/_editor-layout/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/(auth)/_auth-layout/login/': typeof authAuthLayoutLoginIndexRoute
   '/(auth)/_auth-layout/register/': typeof authAuthLayoutRegisterIndexRoute
@@ -167,6 +183,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/$slug'
     | '/'
+    | '/editor/$postId'
     | '/blog/$slug'
     | '/login'
     | '/register'
@@ -181,6 +198,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/$slug'
     | '/'
+    | '/editor/$postId'
     | '/blog/$slug'
     | '/login'
     | '/register'
@@ -191,12 +209,14 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/(auth)/_auth-layout'
+    | '/(editor)/_editor-layout'
     | '/(marketing)/_marketing-layout'
     | '/api/og'
     | '/(dashboard)/dashboard'
     | '/(dashboard)/dashboard/_dashboard-layout'
     | '/(marketing)/_marketing-layout/$slug'
     | '/(marketing)/_marketing-layout/'
+    | '/(editor)/_editor-layout/editor/$postId'
     | '/(marketing)/_marketing-layout/blog/$slug'
     | '/(auth)/_auth-layout/login/'
     | '/(auth)/_auth-layout/register/'
@@ -209,6 +229,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   authAuthLayoutRoute: typeof authAuthLayoutRouteWithChildren
+  editorEditorLayoutRoute: typeof editorEditorLayoutRouteWithChildren
   marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
   ApiOgRoute: typeof ApiOgRoute
   dashboardDashboardRoute: typeof dashboardDashboardRouteWithChildren
@@ -235,6 +256,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof marketingMarketingLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(editor)/_editor-layout': {
+      id: '/(editor)/_editor-layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof editorEditorLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/_auth-layout': {
@@ -307,6 +335,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof marketingMarketingLayoutBlogSlugRouteImport
       parentRoute: typeof marketingMarketingLayoutRoute
     }
+    '/(editor)/_editor-layout/editor/$postId': {
+      id: '/(editor)/_editor-layout/editor/$postId'
+      path: '/editor/$postId'
+      fullPath: '/editor/$postId'
+      preLoaderRoute: typeof editorEditorLayoutEditorPostIdRouteImport
+      parentRoute: typeof editorEditorLayoutRoute
+    }
     '/(dashboard)/dashboard/_dashboard-layout/settings/': {
       id: '/(dashboard)/dashboard/_dashboard-layout/settings/'
       path: '/settings'
@@ -337,6 +372,17 @@ const authAuthLayoutRouteChildren: authAuthLayoutRouteChildren = {
 const authAuthLayoutRouteWithChildren = authAuthLayoutRoute._addFileChildren(
   authAuthLayoutRouteChildren,
 )
+
+interface editorEditorLayoutRouteChildren {
+  editorEditorLayoutEditorPostIdRoute: typeof editorEditorLayoutEditorPostIdRoute
+}
+
+const editorEditorLayoutRouteChildren: editorEditorLayoutRouteChildren = {
+  editorEditorLayoutEditorPostIdRoute: editorEditorLayoutEditorPostIdRoute,
+}
+
+const editorEditorLayoutRouteWithChildren =
+  editorEditorLayoutRoute._addFileChildren(editorEditorLayoutRouteChildren)
 
 interface marketingMarketingLayoutRouteChildren {
   marketingMarketingLayoutSlugRoute: typeof marketingMarketingLayoutSlugRoute
@@ -398,6 +444,7 @@ const dashboardDashboardRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   authAuthLayoutRoute: authAuthLayoutRouteWithChildren,
+  editorEditorLayoutRoute: editorEditorLayoutRouteWithChildren,
   marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
   ApiOgRoute: ApiOgRoute,
   dashboardDashboardRoute: dashboardDashboardRouteWithChildren,
