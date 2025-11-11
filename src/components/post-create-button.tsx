@@ -38,10 +38,7 @@ export function PostCreateButton({
 
 		const post = response.data;
 
-		// This forces a cache invalidation.
-		// router.refresh();
-
-		// navigate({ to: "/editor/$postId", params: { postId: post.id } });
+		navigate({ to: `/editor/${post.id}` });
 	}
 
 	return (

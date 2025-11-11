@@ -4,16 +4,14 @@ import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { EmptyPlaceholder } from "@/components/empty-placeholder";
 import { PostCreateButton } from "@/components/post-create-button";
+import { PostItem } from "@/components/post-item";
 import { getPosts } from "@/lib/functions/posts";
 
 export const Route = createFileRoute(
 	"/(dashboard)/dashboard/_dashboard-layout/",
 )({
 	component: DashboardPage,
-	loader: async () => {
-		const posts = await getPosts({});
-		return [];
-	},
+	loader: async () => await getPosts(),
 	head: () => ({
 		meta: [
 			{
@@ -32,11 +30,10 @@ function DashboardPage() {
 				<PostCreateButton />
 			</DashboardHeader>
 			<div>
-				{posts?.length ? (
+				{posts.success && posts.data.length ? (
 					<div className="divide-y divide-border rounded-md border">
-						{posts.map((post) => (
-							// TODO: <PostItem key={post.id} post={post} />
-							<></>
+						{posts.data.map((post) => (
+							<PostItem key={post.id} post={post} />
 						))}
 					</div>
 				) : (
