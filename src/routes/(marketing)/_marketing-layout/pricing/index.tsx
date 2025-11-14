@@ -4,16 +4,18 @@ import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/(marketing)/_marketing-layout/pricing/")({
-	component: PricingPage,
-	head: () => ({
-		meta: [
-			{
-				title: "Pricing | Taxonomy Restart",
-			},
-		],
-	}),
-});
+export const Route = createFileRoute("/(marketing)/_marketing-layout/pricing/")(
+	{
+		component: PricingPage,
+		head: () => ({
+			meta: [
+				{
+					title: "Pricing | Taxonomy Restart",
+				},
+			],
+		}),
+	},
+);
 
 function PricingPage() {
 	return (
@@ -55,7 +57,7 @@ function PricingPage() {
 				</div>
 				<div className="flex flex-col gap-4 text-center">
 					<div>
-						<h4 className="font-bold text-7xl">$19</h4>
+						<h4 className="font-bold text-7xl">$0</h4>
 						<p className="font-medium text-muted-foreground text-sm">
 							Billed Monthly
 						</p>
@@ -67,10 +69,10 @@ function PricingPage() {
 			</div>
 			<div className="mx-auto flex w-full max-w-232 flex-col gap-4">
 				<p className="max-w-[85%] text-muted-foreground leading-normal sm:leading-7">
-					Taxonomy is a demo app.{" "}
+					Taxonomy Restart is a demo app.{" "}
 					<strong>You can test the upgrade and won&apos;t be charged.</strong>
 				</p>
 			</div>
 		</section>
-	)
+	);
 }
