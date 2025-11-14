@@ -16,6 +16,7 @@ import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketin
 import { Route as editorEditorLayoutRouteImport } from './routes/(editor)/_editor-layout'
 import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
 import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
+import { Route as ApiWebhooksStripeRouteImport } from './routes/api/webhooks/stripe'
 import { Route as marketingMarketingLayoutSlugRouteImport } from './routes/(marketing)/_marketing-layout/$slug'
 import { Route as dashboardDashboardDashboardLayoutRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout'
 import { Route as marketingMarketingLayoutPricingIndexRouteImport } from './routes/(marketing)/_marketing-layout/pricing/index'
@@ -61,6 +62,11 @@ const marketingMarketingLayoutIndexRoute =
     path: '/',
     getParentRoute: () => marketingMarketingLayoutRoute,
   } as any)
+const ApiWebhooksStripeRoute = ApiWebhooksStripeRouteImport.update({
+  id: '/api/webhooks/stripe',
+  path: '/api/webhooks/stripe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const marketingMarketingLayoutSlugRoute =
   marketingMarketingLayoutSlugRouteImport.update({
     id: '/$slug',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/api/og': typeof ApiOgRoute
   '/dashboard': typeof dashboardDashboardDashboardLayoutRouteWithChildren
   '/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/api/og': typeof ApiOgRoute
   '/dashboard': typeof dashboardDashboardDashboardLayoutIndexRoute
   '/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/': typeof marketingMarketingLayoutIndexRoute
   '/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/(dashboard)/dashboard': typeof dashboardDashboardRouteWithChildren
   '/(dashboard)/dashboard/_dashboard-layout': typeof dashboardDashboardDashboardLayoutRouteWithChildren
   '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
+  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
   '/(editor)/_editor-layout/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/dashboard'
     | '/$slug'
+    | '/api/webhooks/stripe'
     | '/'
     | '/editor/$postId'
     | '/blog/$slug'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/api/og'
     | '/dashboard'
     | '/$slug'
+    | '/api/webhooks/stripe'
     | '/'
     | '/editor/$postId'
     | '/blog/$slug'
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/(dashboard)/dashboard'
     | '/(dashboard)/dashboard/_dashboard-layout'
     | '/(marketing)/_marketing-layout/$slug'
+    | '/api/webhooks/stripe'
     | '/(marketing)/_marketing-layout/'
     | '/(editor)/_editor-layout/editor/$postId'
     | '/(marketing)/_marketing-layout/blog/$slug'
@@ -233,6 +245,7 @@ export interface RootRouteChildren {
   marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
   ApiOgRoute: typeof ApiOgRoute
   dashboardDashboardRoute: typeof dashboardDashboardRouteWithChildren
+  ApiWebhooksStripeRoute: typeof ApiWebhooksStripeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof marketingMarketingLayoutIndexRouteImport
       parentRoute: typeof marketingMarketingLayoutRoute
+    }
+    '/api/webhooks/stripe': {
+      id: '/api/webhooks/stripe'
+      path: '/api/webhooks/stripe'
+      fullPath: '/api/webhooks/stripe'
+      preLoaderRoute: typeof ApiWebhooksStripeRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(marketing)/_marketing-layout/$slug': {
       id: '/(marketing)/_marketing-layout/$slug'
@@ -448,6 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
   ApiOgRoute: ApiOgRoute,
   dashboardDashboardRoute: dashboardDashboardRouteWithChildren,
+  ApiWebhooksStripeRoute: ApiWebhooksStripeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

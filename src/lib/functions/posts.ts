@@ -4,6 +4,7 @@ import { createServerFn } from "@tanstack/react-start";
 import type { Prisma } from "generated/prisma/client";
 
 import * as v from "valibot";
+import { getSubscriptionPlan } from "@/lib/functions/auth";
 import prisma from "@/lib/prisma";
 import type { Result } from "@/types";
 
@@ -70,6 +71,24 @@ export const createPost = createServerFn({ method: "POST" })
 
 				if (!isAuthenticated) {
 					return { success: false, error: "Unauthorized" };
+				}
+
+				const subscriptionPlan = await getSubscriptionPlan({
+					data: { userId },
+				});
+
+				// If user is on a free plan.
+				// Check if user has reached limit of 3 posts.
+				if (!subscriptionPlan?.isPro) {
+					const count = await prisma.post.count({
+						where: {
+							authorId: userId,
+						},
+					});
+
+					if (count >= 3) {
+						return { success: false, error: "This action requires a pro plan" };
+					}
 				}
 
 				const post = await prisma.post.create({

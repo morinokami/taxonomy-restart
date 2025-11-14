@@ -25,7 +25,7 @@ export function PostCreateButton({
 		setIsLoading(false);
 
 		if (!response.success) {
-			if (response.error === "Unauthorized") {
+			if (response.error === "This action requires a pro plan") {
 				return toast.error("Limit of 3 posts reached.", {
 					description: "Please upgrade to the PRO plan.",
 				});
