@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-
 import { allAuthors, allPosts } from "content-collections";
+
 import { Icons } from "@/components/icons";
 import { Mdx } from "@/components/mdx-components";
 import { buttonVariants } from "@/components/ui/button";

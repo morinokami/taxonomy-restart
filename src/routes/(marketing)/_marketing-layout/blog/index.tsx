@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-
 import { allPosts } from "content-collections";
+
 import { formatDate } from "@/lib/utils";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/blog/")({

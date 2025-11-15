@@ -148,6 +148,60 @@ const docs = defineCollection({
 	},
 });
 
+const guides = defineCollection({
+	name: "guides",
+	directory: "src/content/guides",
+	include: "**/*.mdx",
+	schema: v.object({
+		title: v.string(),
+		description: v.optional(v.string()),
+		date: v.string(),
+		published: v.optional(v.boolean(), true),
+		slug: v.string(),
+		content: v.string(),
+	}),
+	transform: async (document, context) => {
+		const mdx = await compileMDX(context, document, {
+			rehypePlugins: [
+				rehypeSlug,
+				[
+					rehypePrettyCode,
+					{
+						theme: "github-dark",
+						onVisitLine(node) {
+							// Prevent lines from collapsing in `display: grid` mode, and allow empty
+							// lines to be copy/pasted
+							if (node.children.length === 0) {
+								node.children = [{ type: "text", value: " " }];
+							}
+						},
+						onVisitHighlightedLine(node) {
+							node.properties.className?.push("line--highlighted");
+						},
+						onVisitHighlightedChars(node) {
+							node.properties.className = ["word--highlighted"];
+						},
+					} satisfies RehypePrettyCodeOptions,
+				],
+				[
+					rehypeAutolinkHeadings,
+					{
+						properties: {
+							className: ["subheading-anchor"],
+							ariaLabel: "Link to section",
+						},
+					} satisfies RehypeAutolinkHeadingsOptions,
+				],
+			],
+			remarkPlugins: [remarkGfm],
+		});
+		return {
+			...document,
+			mdx,
+		};
+	},
+});
+
 export default defineConfig({
-	collections: [authors, posts, pages, docs],
+	collections: [authors, posts, pages, docs, guides],
 });

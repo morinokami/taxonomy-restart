@@ -36,6 +36,18 @@ const config = defineConfig({
 					path: "/docs/documentation/style-guide",
 					prerender: { enabled: true },
 				},
+				{
+					path: "/guides",
+					prerender: { enabled: true },
+				},
+				{
+					path: "/guides/build-blog-using-contentlayer-mdx",
+					prerender: { enabled: true },
+				},
+				{
+					path: "/guides/using-next-auth-next-13",
+					prerender: { enabled: true },
+				},
 			],
 		}),
 		nitro(),

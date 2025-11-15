@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-
 import type { Doc } from "content-collections";
+
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { docsConfig } from "@/config/docs";

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-
 import { allDocs } from "content-collections";
+
 import { DocsPageHeader } from "@/components/docs-page-header";
 import { DocsPager } from "@/components/docs-pager";
 import { Mdx } from "@/components/mdx-components";

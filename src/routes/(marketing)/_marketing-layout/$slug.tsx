@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-
 import { allPages } from "content-collections";
+
 import { Mdx } from "@/components/mdx-components";
 import { siteConfig } from "@/config/site";
 import { absoluteUrl } from "@/lib/utils";

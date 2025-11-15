@@ -2,7 +2,7 @@
   "private": true,
   "name": "taxonomy-restart",
   "type": "module",
-  "packageManager": "bun@1.3.1",
+  "packageManager": "bun@1.3.2",
   "scripts": {
     "dev": "bun --bun vite dev --port 3000",
     "build": "bun --bun vite build",
@@ -43,6 +43,7 @@
     "@vercel/og": "0.8.5",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "date-fns": "4.1.0",
     "dotenv": "17.2.3",
     "lucide-react": "0.553.0",
     "mdast-util-toc": "7.1.0",
