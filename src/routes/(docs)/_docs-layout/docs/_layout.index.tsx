@@ -5,7 +5,9 @@ import { DocsPageHeader } from "@/components/docs-page-header";
 import { DocsPager } from "@/components/docs-pager";
 import { Mdx } from "@/components/mdx-components";
 import { DashboardTableOfContents } from "@/components/toc";
+import { siteConfig } from "@/config/site";
 import { getTableOfContents } from "@/lib/toc";
+import { absoluteUrl } from "@/lib/utils";
 
 export const Route = createFileRoute("/(docs)/_docs-layout/docs/_layout/")({
 	component: DocIndexPage,
@@ -16,9 +18,75 @@ export const Route = createFileRoute("/(docs)/_docs-layout/docs/_layout/")({
 
 		return { doc, toc };
 	},
-	head: ({ params }) => {
-		// TODO: Add head
-		return {};
+	head: () => {
+		const doc = allDocs.filter((doc) => doc._meta.path === "index")[0];
+
+		const url = import.meta.env.VITE_APP_URL;
+
+		const ogUrl = new URL(`${url}/api/og`);
+		ogUrl.searchParams.set("heading", doc.title);
+		ogUrl.searchParams.set("type", "Documentation");
+		ogUrl.searchParams.set("mode", "dark");
+
+		return {
+			meta: [
+				{
+					title: `${doc.title} | ${siteConfig.name}`,
+				},
+				{
+					name: "description",
+					content: doc.description,
+				},
+				{
+					name: "og:title",
+					content: doc.title,
+				},
+				{
+					name: "og:description",
+					content: doc.description,
+				},
+				{
+					name: "og:type",
+					content: "article",
+				},
+				{
+					name: "og:url",
+					content: absoluteUrl(`/docs`),
+				},
+				{
+					name: "og:image",
+					content: ogUrl.toString(),
+				},
+				{
+					name: "og:image:width",
+					content: "1200",
+				},
+				{
+					name: "og:image:height",
+					content: "630",
+				},
+				{
+					name: "og:image:alt",
+					content: doc.title,
+				},
+				{
+					name: "twitter:card",
+					content: "summary_large_image",
+				},
+				{
+					name: "twitter:title",
+					content: doc.title,
+				},
+				{
+					name: "twitter:description",
+					content: doc.description,
+				},
+				{
+					name: "twitter:image",
+					content: ogUrl.toString(),
+				},
+			],
+		};
 	},
 });
 

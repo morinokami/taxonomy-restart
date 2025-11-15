@@ -6,8 +6,9 @@ import { Icons } from "@/components/icons";
 import { Mdx } from "@/components/mdx-components";
 import { DashboardTableOfContents } from "@/components/toc";
 import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 import { getTableOfContents } from "@/lib/toc";
-import { cn } from "@/lib/utils";
+import { absoluteUrl, cn } from "@/lib/utils";
 
 export const Route = createFileRoute(
 	"/(docs)/_docs-layout/guides/_layout/$slug",
@@ -25,8 +26,78 @@ export const Route = createFileRoute(
 		return { guide, toc };
 	},
 	head: ({ params }) => {
-		// TODO: Add head
-		return {};
+		const guide = allGuides.find((guide) => guide.slug === params.slug);
+
+		if (!guide) {
+			return {};
+		}
+
+		const url = import.meta.env.VITE_APP_URL;
+
+		const ogUrl = new URL(`${url}/api/og`);
+		ogUrl.searchParams.set("heading", guide.title);
+		ogUrl.searchParams.set("type", "Guide");
+		ogUrl.searchParams.set("mode", "dark");
+
+		return {
+			meta: [
+				{
+					title: `${guide.title} | ${siteConfig.name}`,
+				},
+				{
+					name: "description",
+					content: guide.description,
+				},
+				{
+					name: "og:title",
+					content: guide.title,
+				},
+				{
+					name: "og:description",
+					content: guide.description,
+				},
+				{
+					name: "og:type",
+					content: "article",
+				},
+				{
+					name: "og:url",
+					content: absoluteUrl(`/guides/${guide.slug}`),
+				},
+				{
+					name: "og:image",
+					content: ogUrl.toString(),
+				},
+				{
+					name: "og:image:width",
+					content: "1200",
+				},
+				{
+					name: "og:image:height",
+					content: "630",
+				},
+				{
+					name: "og:image:alt",
+					content: guide.title,
+				},
+				{
+					name: "twitter:card",
+					content: "summary_large_image",
+				},
+				{
+					name: "twitter:title",
+					content: guide.title,
+				},
+				{
+					name: "twitter:description",
+					content: guide.description,
+				},
+				{
+					name: "twitter:image",
+					content: ogUrl.toString(),
+				},
+			],
+		};
 	},
 });
 
