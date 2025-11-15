@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ApiOgRouteImport } from './routes/api/og'
 import { Route as marketingMarketingLayoutRouteImport } from './routes/(marketing)/_marketing-layout'
 import { Route as editorEditorLayoutRouteImport } from './routes/(editor)/_editor-layout'
+import { Route as docsDocsLayoutRouteImport } from './routes/(docs)/_docs-layout'
 import { Route as authAuthLayoutRouteImport } from './routes/(auth)/_auth-layout'
 import { Route as marketingMarketingLayoutIndexRouteImport } from './routes/(marketing)/_marketing-layout/index'
 import { Route as ApiWebhooksStripeRouteImport } from './routes/api/webhooks/stripe'
@@ -21,16 +22,23 @@ import { Route as marketingMarketingLayoutSlugRouteImport } from './routes/(mark
 import { Route as dashboardDashboardDashboardLayoutRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout'
 import { Route as marketingMarketingLayoutPricingIndexRouteImport } from './routes/(marketing)/_marketing-layout/pricing/index'
 import { Route as marketingMarketingLayoutBlogIndexRouteImport } from './routes/(marketing)/_marketing-layout/blog/index'
+import { Route as docsDocsLayoutGuidesIndexRouteImport } from './routes/(docs)/_docs-layout/guides/index'
 import { Route as dashboardDashboardDashboardLayoutIndexRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout/index'
 import { Route as authAuthLayoutRegisterIndexRouteImport } from './routes/(auth)/_auth-layout/register/index'
 import { Route as authAuthLayoutLoginIndexRouteImport } from './routes/(auth)/_auth-layout/login/index'
 import { Route as marketingMarketingLayoutBlogSlugRouteImport } from './routes/(marketing)/_marketing-layout/blog/$slug'
 import { Route as editorEditorLayoutEditorPostIdRouteImport } from './routes/(editor)/_editor-layout/editor/$postId'
+import { Route as docsDocsLayoutDocsLayoutRouteImport } from './routes/(docs)/_docs-layout/docs/_layout'
+import { Route as docsDocsLayoutDocsLayoutIndexRouteImport } from './routes/(docs)/_docs-layout/docs/_layout.index'
 import { Route as dashboardDashboardDashboardLayoutSettingsIndexRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout/settings/index'
 import { Route as dashboardDashboardDashboardLayoutBillingIndexRouteImport } from './routes/(dashboard)/dashboard/_dashboard-layout/billing/index'
+import { Route as docsDocsLayoutDocsLayoutSplatRouteImport } from './routes/(docs)/_docs-layout/docs/_layout.$'
 
 const dashboardDashboardRouteImport = createFileRoute(
   '/(dashboard)/dashboard',
+)()
+const docsDocsLayoutDocsRouteImport = createFileRoute(
+  '/(docs)/_docs-layout/docs',
 )()
 
 const dashboardDashboardRoute = dashboardDashboardRouteImport.update({
@@ -52,9 +60,18 @@ const editorEditorLayoutRoute = editorEditorLayoutRouteImport.update({
   id: '/(editor)/_editor-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const docsDocsLayoutRoute = docsDocsLayoutRouteImport.update({
+  id: '/(docs)/_docs-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const authAuthLayoutRoute = authAuthLayoutRouteImport.update({
   id: '/(auth)/_auth-layout',
   getParentRoute: () => rootRouteImport,
+} as any)
+const docsDocsLayoutDocsRoute = docsDocsLayoutDocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => docsDocsLayoutRoute,
 } as any)
 const marketingMarketingLayoutIndexRoute =
   marketingMarketingLayoutIndexRouteImport.update({
@@ -90,6 +107,12 @@ const marketingMarketingLayoutBlogIndexRoute =
     path: '/blog/',
     getParentRoute: () => marketingMarketingLayoutRoute,
   } as any)
+const docsDocsLayoutGuidesIndexRoute =
+  docsDocsLayoutGuidesIndexRouteImport.update({
+    id: '/guides/',
+    path: '/guides/',
+    getParentRoute: () => docsDocsLayoutRoute,
+  } as any)
 const dashboardDashboardDashboardLayoutIndexRoute =
   dashboardDashboardDashboardLayoutIndexRouteImport.update({
     id: '/',
@@ -120,6 +143,17 @@ const editorEditorLayoutEditorPostIdRoute =
     path: '/editor/$postId',
     getParentRoute: () => editorEditorLayoutRoute,
   } as any)
+const docsDocsLayoutDocsLayoutRoute =
+  docsDocsLayoutDocsLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => docsDocsLayoutDocsRoute,
+  } as any)
+const docsDocsLayoutDocsLayoutIndexRoute =
+  docsDocsLayoutDocsLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => docsDocsLayoutDocsLayoutRoute,
+  } as any)
 const dashboardDashboardDashboardLayoutSettingsIndexRoute =
   dashboardDashboardDashboardLayoutSettingsIndexRouteImport.update({
     id: '/settings/',
@@ -132,6 +166,12 @@ const dashboardDashboardDashboardLayoutBillingIndexRoute =
     path: '/billing/',
     getParentRoute: () => dashboardDashboardDashboardLayoutRoute,
   } as any)
+const docsDocsLayoutDocsLayoutSplatRoute =
+  docsDocsLayoutDocsLayoutSplatRouteImport.update({
+    id: '/$',
+    path: '/$',
+    getParentRoute: () => docsDocsLayoutDocsLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/api/og': typeof ApiOgRoute
@@ -139,15 +179,19 @@ export interface FileRoutesByFullPath {
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/': typeof marketingMarketingLayoutIndexRoute
+  '/docs': typeof docsDocsLayoutDocsLayoutRouteWithChildren
   '/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
   '/register': typeof authAuthLayoutRegisterIndexRoute
   '/dashboard/': typeof dashboardDashboardDashboardLayoutIndexRoute
+  '/guides': typeof docsDocsLayoutGuidesIndexRoute
   '/blog': typeof marketingMarketingLayoutBlogIndexRoute
   '/pricing': typeof marketingMarketingLayoutPricingIndexRoute
+  '/docs/$': typeof docsDocsLayoutDocsLayoutSplatRoute
   '/dashboard/billing': typeof dashboardDashboardDashboardLayoutBillingIndexRoute
   '/dashboard/settings': typeof dashboardDashboardDashboardLayoutSettingsIndexRoute
+  '/docs/': typeof docsDocsLayoutDocsLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/api/og': typeof ApiOgRoute
@@ -155,18 +199,22 @@ export interface FileRoutesByTo {
   '/$slug': typeof marketingMarketingLayoutSlugRoute
   '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/': typeof marketingMarketingLayoutIndexRoute
+  '/docs': typeof docsDocsLayoutDocsLayoutIndexRoute
   '/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/login': typeof authAuthLayoutLoginIndexRoute
   '/register': typeof authAuthLayoutRegisterIndexRoute
+  '/guides': typeof docsDocsLayoutGuidesIndexRoute
   '/blog': typeof marketingMarketingLayoutBlogIndexRoute
   '/pricing': typeof marketingMarketingLayoutPricingIndexRoute
+  '/docs/$': typeof docsDocsLayoutDocsLayoutSplatRoute
   '/dashboard/billing': typeof dashboardDashboardDashboardLayoutBillingIndexRoute
   '/dashboard/settings': typeof dashboardDashboardDashboardLayoutSettingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/(auth)/_auth-layout': typeof authAuthLayoutRouteWithChildren
+  '/(docs)/_docs-layout': typeof docsDocsLayoutRouteWithChildren
   '/(editor)/_editor-layout': typeof editorEditorLayoutRouteWithChildren
   '/(marketing)/_marketing-layout': typeof marketingMarketingLayoutRouteWithChildren
   '/api/og': typeof ApiOgRoute
@@ -175,15 +223,20 @@ export interface FileRoutesById {
   '/(marketing)/_marketing-layout/$slug': typeof marketingMarketingLayoutSlugRoute
   '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
   '/(marketing)/_marketing-layout/': typeof marketingMarketingLayoutIndexRoute
+  '/(docs)/_docs-layout/docs': typeof docsDocsLayoutDocsRouteWithChildren
+  '/(docs)/_docs-layout/docs/_layout': typeof docsDocsLayoutDocsLayoutRouteWithChildren
   '/(editor)/_editor-layout/editor/$postId': typeof editorEditorLayoutEditorPostIdRoute
   '/(marketing)/_marketing-layout/blog/$slug': typeof marketingMarketingLayoutBlogSlugRoute
   '/(auth)/_auth-layout/login/': typeof authAuthLayoutLoginIndexRoute
   '/(auth)/_auth-layout/register/': typeof authAuthLayoutRegisterIndexRoute
   '/(dashboard)/dashboard/_dashboard-layout/': typeof dashboardDashboardDashboardLayoutIndexRoute
+  '/(docs)/_docs-layout/guides/': typeof docsDocsLayoutGuidesIndexRoute
   '/(marketing)/_marketing-layout/blog/': typeof marketingMarketingLayoutBlogIndexRoute
   '/(marketing)/_marketing-layout/pricing/': typeof marketingMarketingLayoutPricingIndexRoute
+  '/(docs)/_docs-layout/docs/_layout/$': typeof docsDocsLayoutDocsLayoutSplatRoute
   '/(dashboard)/dashboard/_dashboard-layout/billing/': typeof dashboardDashboardDashboardLayoutBillingIndexRoute
   '/(dashboard)/dashboard/_dashboard-layout/settings/': typeof dashboardDashboardDashboardLayoutSettingsIndexRoute
+  '/(docs)/_docs-layout/docs/_layout/': typeof docsDocsLayoutDocsLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -193,15 +246,19 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/api/webhooks/stripe'
     | '/'
+    | '/docs'
     | '/editor/$postId'
     | '/blog/$slug'
     | '/login'
     | '/register'
     | '/dashboard/'
+    | '/guides'
     | '/blog'
     | '/pricing'
+    | '/docs/$'
     | '/dashboard/billing'
     | '/dashboard/settings'
+    | '/docs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/api/og'
@@ -209,17 +266,21 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/api/webhooks/stripe'
     | '/'
+    | '/docs'
     | '/editor/$postId'
     | '/blog/$slug'
     | '/login'
     | '/register'
+    | '/guides'
     | '/blog'
     | '/pricing'
+    | '/docs/$'
     | '/dashboard/billing'
     | '/dashboard/settings'
   id:
     | '__root__'
     | '/(auth)/_auth-layout'
+    | '/(docs)/_docs-layout'
     | '/(editor)/_editor-layout'
     | '/(marketing)/_marketing-layout'
     | '/api/og'
@@ -228,19 +289,25 @@ export interface FileRouteTypes {
     | '/(marketing)/_marketing-layout/$slug'
     | '/api/webhooks/stripe'
     | '/(marketing)/_marketing-layout/'
+    | '/(docs)/_docs-layout/docs'
+    | '/(docs)/_docs-layout/docs/_layout'
     | '/(editor)/_editor-layout/editor/$postId'
     | '/(marketing)/_marketing-layout/blog/$slug'
     | '/(auth)/_auth-layout/login/'
     | '/(auth)/_auth-layout/register/'
     | '/(dashboard)/dashboard/_dashboard-layout/'
+    | '/(docs)/_docs-layout/guides/'
     | '/(marketing)/_marketing-layout/blog/'
     | '/(marketing)/_marketing-layout/pricing/'
+    | '/(docs)/_docs-layout/docs/_layout/$'
     | '/(dashboard)/dashboard/_dashboard-layout/billing/'
     | '/(dashboard)/dashboard/_dashboard-layout/settings/'
+    | '/(docs)/_docs-layout/docs/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   authAuthLayoutRoute: typeof authAuthLayoutRouteWithChildren
+  docsDocsLayoutRoute: typeof docsDocsLayoutRouteWithChildren
   editorEditorLayoutRoute: typeof editorEditorLayoutRouteWithChildren
   marketingMarketingLayoutRoute: typeof marketingMarketingLayoutRouteWithChildren
   ApiOgRoute: typeof ApiOgRoute
@@ -278,12 +345,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof editorEditorLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(docs)/_docs-layout': {
+      id: '/(docs)/_docs-layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof docsDocsLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/(auth)/_auth-layout': {
       id: '/(auth)/_auth-layout'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof authAuthLayoutRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(docs)/_docs-layout/docs': {
+      id: '/(docs)/_docs-layout/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof docsDocsLayoutDocsRouteImport
+      parentRoute: typeof docsDocsLayoutRoute
     }
     '/(marketing)/_marketing-layout/': {
       id: '/(marketing)/_marketing-layout/'
@@ -327,6 +408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof marketingMarketingLayoutBlogIndexRouteImport
       parentRoute: typeof marketingMarketingLayoutRoute
     }
+    '/(docs)/_docs-layout/guides/': {
+      id: '/(docs)/_docs-layout/guides/'
+      path: '/guides'
+      fullPath: '/guides'
+      preLoaderRoute: typeof docsDocsLayoutGuidesIndexRouteImport
+      parentRoute: typeof docsDocsLayoutRoute
+    }
     '/(dashboard)/dashboard/_dashboard-layout/': {
       id: '/(dashboard)/dashboard/_dashboard-layout/'
       path: '/'
@@ -362,6 +450,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof editorEditorLayoutEditorPostIdRouteImport
       parentRoute: typeof editorEditorLayoutRoute
     }
+    '/(docs)/_docs-layout/docs/_layout': {
+      id: '/(docs)/_docs-layout/docs/_layout'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof docsDocsLayoutDocsLayoutRouteImport
+      parentRoute: typeof docsDocsLayoutDocsRoute
+    }
+    '/(docs)/_docs-layout/docs/_layout/': {
+      id: '/(docs)/_docs-layout/docs/_layout/'
+      path: '/'
+      fullPath: '/docs/'
+      preLoaderRoute: typeof docsDocsLayoutDocsLayoutIndexRouteImport
+      parentRoute: typeof docsDocsLayoutDocsLayoutRoute
+    }
     '/(dashboard)/dashboard/_dashboard-layout/settings/': {
       id: '/(dashboard)/dashboard/_dashboard-layout/settings/'
       path: '/settings'
@@ -375,6 +477,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/billing'
       preLoaderRoute: typeof dashboardDashboardDashboardLayoutBillingIndexRouteImport
       parentRoute: typeof dashboardDashboardDashboardLayoutRoute
+    }
+    '/(docs)/_docs-layout/docs/_layout/$': {
+      id: '/(docs)/_docs-layout/docs/_layout/$'
+      path: '/$'
+      fullPath: '/docs/$'
+      preLoaderRoute: typeof docsDocsLayoutDocsLayoutSplatRouteImport
+      parentRoute: typeof docsDocsLayoutDocsLayoutRoute
     }
   }
 }
@@ -391,6 +500,47 @@ const authAuthLayoutRouteChildren: authAuthLayoutRouteChildren = {
 
 const authAuthLayoutRouteWithChildren = authAuthLayoutRoute._addFileChildren(
   authAuthLayoutRouteChildren,
+)
+
+interface docsDocsLayoutDocsLayoutRouteChildren {
+  docsDocsLayoutDocsLayoutSplatRoute: typeof docsDocsLayoutDocsLayoutSplatRoute
+  docsDocsLayoutDocsLayoutIndexRoute: typeof docsDocsLayoutDocsLayoutIndexRoute
+}
+
+const docsDocsLayoutDocsLayoutRouteChildren: docsDocsLayoutDocsLayoutRouteChildren =
+  {
+    docsDocsLayoutDocsLayoutSplatRoute: docsDocsLayoutDocsLayoutSplatRoute,
+    docsDocsLayoutDocsLayoutIndexRoute: docsDocsLayoutDocsLayoutIndexRoute,
+  }
+
+const docsDocsLayoutDocsLayoutRouteWithChildren =
+  docsDocsLayoutDocsLayoutRoute._addFileChildren(
+    docsDocsLayoutDocsLayoutRouteChildren,
+  )
+
+interface docsDocsLayoutDocsRouteChildren {
+  docsDocsLayoutDocsLayoutRoute: typeof docsDocsLayoutDocsLayoutRouteWithChildren
+}
+
+const docsDocsLayoutDocsRouteChildren: docsDocsLayoutDocsRouteChildren = {
+  docsDocsLayoutDocsLayoutRoute: docsDocsLayoutDocsLayoutRouteWithChildren,
+}
+
+const docsDocsLayoutDocsRouteWithChildren =
+  docsDocsLayoutDocsRoute._addFileChildren(docsDocsLayoutDocsRouteChildren)
+
+interface docsDocsLayoutRouteChildren {
+  docsDocsLayoutDocsRoute: typeof docsDocsLayoutDocsRouteWithChildren
+  docsDocsLayoutGuidesIndexRoute: typeof docsDocsLayoutGuidesIndexRoute
+}
+
+const docsDocsLayoutRouteChildren: docsDocsLayoutRouteChildren = {
+  docsDocsLayoutDocsRoute: docsDocsLayoutDocsRouteWithChildren,
+  docsDocsLayoutGuidesIndexRoute: docsDocsLayoutGuidesIndexRoute,
+}
+
+const docsDocsLayoutRouteWithChildren = docsDocsLayoutRoute._addFileChildren(
+  docsDocsLayoutRouteChildren,
 )
 
 interface editorEditorLayoutRouteChildren {
@@ -464,6 +614,7 @@ const dashboardDashboardRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   authAuthLayoutRoute: authAuthLayoutRouteWithChildren,
+  docsDocsLayoutRoute: docsDocsLayoutRouteWithChildren,
   editorEditorLayoutRoute: editorEditorLayoutRouteWithChildren,
   marketingMarketingLayoutRoute: marketingMarketingLayoutRouteWithChildren,
   ApiOgRoute: ApiOgRoute,

@@ -15,7 +15,29 @@ const config = defineConfig({
 			projects: ["./tsconfig.json"],
 		}),
 		tailwindcss(),
-		tanstackStart(),
+		tanstackStart({
+			prerender: {
+				enabled: true,
+				autoStaticPathsDiscovery: false,
+				crawlLinks: false,
+			},
+			pages: [
+				{ path: "/docs", prerender: { enabled: true } },
+				{ path: "/docs/documentation", prerender: { enabled: true } },
+				{
+					path: "/docs/documentation/components",
+					prerender: { enabled: true },
+				},
+				{
+					path: "/docs/documentation/code-blocks",
+					prerender: { enabled: true },
+				},
+				{
+					path: "/docs/documentation/style-guide",
+					prerender: { enabled: true },
+				},
+			],
+		}),
 		nitro(),
 		viteReact({
 			babel: {

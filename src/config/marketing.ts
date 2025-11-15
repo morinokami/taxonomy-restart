@@ -1,4 +1,4 @@
-import type { MarketingConfig } from "types";
+import type { MarketingConfig } from "@/types";
 
 // TODO: Use linkOptions
 export const marketingConfig: MarketingConfig = {
@@ -15,9 +15,9 @@ export const marketingConfig: MarketingConfig = {
 			title: "Blog",
 			href: "/blog",
 		},
-		// {
-		// 	title: "Documentation",
-		// 	href: "/docs",
-		// },
+		{
+			title: "Documentation",
+			href: "/docs",
+		},
 	],
 };

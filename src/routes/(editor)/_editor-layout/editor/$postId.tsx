@@ -5,13 +5,13 @@ import { getPostForUser } from "@/lib/functions/posts";
 
 export const Route = createFileRoute("/(editor)/_editor-layout/editor/$postId")(
 	{
-		component: RouteComponent,
+		component: PostPage,
 		loader: async ({ params }) =>
 			await getPostForUser({ data: { postId: params.postId } }),
 	},
 );
 
-function RouteComponent() {
+function PostPage() {
 	const post = Route.useLoaderData();
 
 	return (

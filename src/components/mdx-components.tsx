@@ -132,7 +132,7 @@ const components = {
 	pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
 		<pre
 			className={cn(
-				"mt-6 mb-4 overflow-x-auto rounded-lg border bg-black",
+				"mt-6 mb-4 overflow-x-auto rounded-lg border bg-black [&>code]:px-3 [&>code]:py-4",
 				className,
 			)}
 			{...props}
@@ -141,7 +141,7 @@ const components = {
 	code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
 		<code
 			className={cn(
-				"relative rounded border p-2 px-[0.3rem] py-[0.2rem] font-mono text-sm",
+				"relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
 				className,
 			)}
 			{...props}
