@@ -34,6 +34,7 @@ function RegisterPage() {
 			<div className="hidden h-full bg-muted lg:block" />
 			<div className="lg:p-8">
 				<div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+					{/* TODO: Show terms and privacy links */}
 					<SignUp appearance={{ theme: [shadcn] }} />
 				</div>
 			</div>

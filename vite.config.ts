@@ -49,6 +49,7 @@ const config = defineConfig({
 					prerender: { enabled: true },
 				},
 			],
+			// TODO: sitemap: {},
 		}),
 		nitro(),
 		viteReact({

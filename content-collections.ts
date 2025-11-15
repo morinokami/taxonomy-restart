@@ -77,25 +77,6 @@ const posts = defineCollection({
 	},
 });
 
-const pages = defineCollection({
-	name: "pages",
-	directory: "src/content/pages",
-	include: "**/*.md",
-	schema: v.object({
-		title: v.string(),
-		description: v.string(),
-		slug: v.string(),
-		content: v.string(),
-	}),
-	transform: async (document, context) => {
-		const mdx = await compileMDX(context, document);
-		return {
-			...document,
-			mdx,
-		};
-	},
-});
-
 const docs = defineCollection({
 	name: "docs",
 	directory: "src/content/docs",
@@ -202,6 +183,25 @@ const guides = defineCollection({
 	},
 });
 
+const pages = defineCollection({
+	name: "pages",
+	directory: "src/content/pages",
+	include: "**/*.md",
+	schema: v.object({
+		title: v.string(),
+		description: v.string(),
+		slug: v.string(),
+		content: v.string(),
+	}),
+	transform: async (document, context) => {
+		const mdx = await compileMDX(context, document);
+		return {
+			...document,
+			mdx,
+		};
+	},
+});
+
 export default defineConfig({
-	collections: [authors, posts, pages, docs, guides],
+	collections: [authors, posts, docs, guides, pages],
 });
