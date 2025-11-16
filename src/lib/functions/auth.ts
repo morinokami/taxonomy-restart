@@ -14,6 +14,18 @@ export const createClerk = createServerOnlyFn(async () => {
 	});
 });
 
+export const redirectIfAuthenticated = createServerFn({
+	method: "GET",
+}).handler(async () => {
+	const { isAuthenticated } = await auth();
+
+	if (isAuthenticated) {
+		throw redirect({
+			to: "/dashboard",
+		});
+	}
+});
+
 export const getAuthState = createServerFn({ method: "GET" }).handler(
 	async () => {
 		const { isAuthenticated, userId } = await auth();

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/(docs)/_docs-layout/guides/_layout/")({
 			{
 				name: "description",
 				content:
-					"This section includes end-to-end guides for developing Taxonomy Restart apps.",
+					"This section includes end-to-end guides for developing TanStack Start apps.",
 			},
 		],
 	}),
@@ -37,7 +37,7 @@ function GuidesPage() {
 		<div className="py-6 lg:py-10">
 			<DocsPageHeader
 				heading="Guides"
-				text="This section includes end-to-end guides for developing Next.js 13 apps."
+				text="This section includes end-to-end guides for developing TanStack Start apps."
 			/>
 			{guides?.length ? (
 				<div className="grid gap-4 md:grid-cols-2 md:gap-6">

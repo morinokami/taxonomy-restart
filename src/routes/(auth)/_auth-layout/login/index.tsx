@@ -4,10 +4,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
+import { redirectIfAuthenticated } from "@/lib/functions/auth";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(auth)/_auth-layout/login/")({
 	component: LoginPage,
+	beforeLoad: async () => {
+		await redirectIfAuthenticated();
+	},
 	head: () => ({
 		meta: [
 			{

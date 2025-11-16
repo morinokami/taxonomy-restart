@@ -29,7 +29,8 @@ function IndexPage() {
 					</h1>
 					<p className="max-w-2xl text-muted-foreground leading-normal sm:text-xl sm:leading-8">
 						I&apos;m building a web app with TanStack Start and open sourcing
-						everything. Follow along as we figure this out together.
+						everything. It&apos;s a port of the Taxonomy app to TanStack Start.
+						Huge thanks to shadcn for the original!
 					</p>
 					<div className="space-x-4">
 						<Link to="/login" className={cn(buttonVariants({ size: "lg" }))}>
@@ -56,8 +57,8 @@ function IndexPage() {
 					</h2>
 					<p className="max-w-[85%] text-muted-foreground leading-normal sm:text-lg sm:leading-7">
 						This project is an experiment to see how a modern app, with features
-						like auth, subscriptions, API routes, and static pages would work in
-						TanStack Start.
+						like auth, subscriptions, server functions, and static pages would
+						work in TanStack Start.
 					</p>
 				</div>
 				<div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-5xl md:grid-cols-3">
