@@ -41,11 +41,11 @@ const config = defineConfig({
 					prerender: { enabled: true },
 				},
 				{
-					path: "/guides/build-blog-using-contentlayer-mdx",
+					path: "/guides/announcing-tanstack-start-v1",
 					prerender: { enabled: true },
 				},
 				{
-					path: "/guides/using-next-auth-next-13",
+					path: "/guides/why-tanstack-start-is-ditching-adapters",
 					prerender: { enabled: true },
 				},
 			],
