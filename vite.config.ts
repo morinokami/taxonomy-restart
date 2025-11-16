@@ -71,6 +71,10 @@ const config = defineConfig({
 			},
 		],
 	},
+	// https://github.com/vercel/satori/issues/582#issuecomment-3447309726
+	ssr: {
+		external: ["@vercel/og"],
+	},
 });
 
 export default config;
