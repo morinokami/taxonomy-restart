@@ -4,22 +4,25 @@ import * as v from "valibot";
 
 import { ogImageSchema } from "@/lib/validations/og";
 
-// TODO: Load fonts
-// const interRegular = fetch(absoluteUrl("/fonts/Inter-Regular.ttf")).then(
-// 	(res) => res.arrayBuffer(),
-// );
-
-// const interBold = fetch(absoluteUrl("/fonts/CalSans-SemiBold.ttf")).then(
-// 	(res) => res.arrayBuffer(),
-// );
+// TODO: Should be loaded from local font
+const interRegular = fetch(
+	new URL(
+		"https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.ttf",
+	),
+).then((res) => res.arrayBuffer());
+const interBold = fetch(
+	new URL(
+		"https://cdn.jsdelivr.net/fontsource/fonts/inter-tight@latest/latin-700-normal.ttf",
+	),
+).then((res) => res.arrayBuffer());
 
 export const Route = createFileRoute("/api/og")({
 	server: {
 		handlers: {
 			GET: async ({ request }) => {
 				try {
-					// const fontRegular = await interRegular;
-					// const fontBold = await interBold;
+					const fontRegular = await interRegular;
+					const fontBold = await interBold;
 
 					const url = new URL(request.url);
 					const values = v.parse(
@@ -138,20 +141,20 @@ export const Route = createFileRoute("/api/og")({
 						{
 							width: 1200,
 							height: 630,
-							// fonts: [
-							// 	{
-							// 		name: "Inter",
-							// 		data: fontRegular,
-							// 		weight: 400,
-							// 		style: "normal",
-							// 	},
-							// 	{
-							// 		name: "Cal Sans",
-							// 		data: fontBold,
-							// 		weight: 700,
-							// 		style: "normal",
-							// 	},
-							// ],
+							fonts: [
+								{
+									name: "Inter",
+									data: fontRegular,
+									weight: 400,
+									style: "normal",
+								},
+								{
+									name: "Inter Tight",
+									data: fontBold,
+									weight: 700,
+									style: "normal",
+								},
+							],
 						},
 					);
 				} catch (_error) {
