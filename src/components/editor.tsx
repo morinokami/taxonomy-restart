@@ -15,7 +15,7 @@ import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { updatePost } from "@/lib/functions/posts";
 import { cn } from "@/lib/utils";
-import { postPatchSchema } from "@/lib/validations/post";
+import { PostPatchSchema } from "@/lib/validations/post";
 
 interface EditorProps {
 	post: Prisma.PostGetPayload<{
@@ -23,11 +23,11 @@ interface EditorProps {
 	}>;
 }
 
-type FormData = v.InferOutput<typeof postPatchSchema>;
+type FormData = v.InferOutput<typeof PostPatchSchema>;
 
 export function Editor({ post }: EditorProps) {
 	const { register, handleSubmit } = useForm<FormData>({
-		resolver: valibotResolver(postPatchSchema),
+		resolver: valibotResolver(PostPatchSchema),
 	});
 	const ref = useRef<EditorJS | null>(null);
 	const navigate = useNavigate({ from: "/editor/$postId" });
@@ -44,7 +44,7 @@ export function Editor({ post }: EditorProps) {
 		const LinkTool = (await import("@editorjs/link")).default;
 		const InlineCode = (await import("@editorjs/inline-code")).default;
 
-		const body = v.parse(postPatchSchema, post);
+		const body = v.parse(PostPatchSchema, post);
 
 		if (!ref.current) {
 			const editor = new EditorJS({

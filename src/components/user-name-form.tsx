@@ -18,14 +18,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { userNameSchema } from "@/lib/validations/user";
+import { UserNameSchema } from "@/lib/validations/user";
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
 	firstName: string | null;
 	lastName: string | null;
 }
 
-type FormData = v.InferOutput<typeof userNameSchema>;
+type FormData = v.InferOutput<typeof UserNameSchema>;
 
 export function UserNameForm({
 	firstName,
@@ -39,7 +39,7 @@ export function UserNameForm({
 		register,
 		formState: { errors },
 	} = useForm<FormData>({
-		resolver: valibotResolver(userNameSchema),
+		resolver: valibotResolver(UserNameSchema),
 		defaultValues: {
 			firstName: firstName ?? "",
 			lastName: lastName ?? "",

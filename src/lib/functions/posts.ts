@@ -8,7 +8,7 @@ import { getSubscriptionPlan } from "@/lib/functions/auth";
 import prisma from "@/lib/prisma";
 import type { Result } from "@/types";
 
-const postCreateSchema = v.object({
+const PostCreateSchema = v.object({
 	title: v.string(),
 	content: v.optional(v.string()),
 });
@@ -53,7 +53,7 @@ export const getPosts = createServerFn().handler(
 );
 
 export const createPost = createServerFn({ method: "POST" })
-	.inputValidator(postCreateSchema)
+	.inputValidator(PostCreateSchema)
 	.handler(
 		async ({
 			data,
