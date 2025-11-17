@@ -1,136 +1,159 @@
+import { linkOptions } from "@tanstack/react-router";
+
 import type { DocsConfig } from "@/types";
 
+// TODO: fix all the @ts-expect-error errors (how to link to splat routes?)
+
 export const docsConfig: DocsConfig = {
-	mainNav: [
+	mainNav: linkOptions([
 		{
-			title: "Documentation",
-			href: "/docs",
+			label: "Documentation",
+			to: "/docs",
 		},
 		{
-			title: "Guides",
-			href: "/guides",
+			label: "Guides",
+			to: "/guides",
 		},
-	],
+	]),
 	sidebarNav: [
 		{
-			title: "Getting Started",
-			items: [
+			label: "Getting Started",
+			items: linkOptions([
 				{
-					title: "Introduction",
-					href: "/docs",
+					label: "Introduction",
+					to: "/docs",
 				},
-			],
+			]),
 		},
 		{
-			title: "Documentation",
-			items: [
+			label: "Documentation",
+			items: linkOptions([
 				{
-					title: "Introduction",
-					href: "/docs/documentation",
+					label: "Introduction",
+					// @ts-expect-error
+					to: "/docs/documentation",
 				},
 				{
-					title: "Contentlayer",
-					href: "/docs/in-progress",
+					label: "Contentlayer",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Components",
-					href: "/docs/documentation/components",
+					label: "Components",
+					// @ts-expect-error
+					to: "/docs/documentation/components",
 				},
 				{
-					title: "Code Blocks",
-					href: "/docs/documentation/code-blocks",
+					label: "Code Blocks",
+					// @ts-expect-error
+					to: "/docs/documentation/code-blocks",
 				},
 				{
-					title: "Style Guide",
-					href: "/docs/documentation/style-guide",
+					label: "Style Guide",
+					// @ts-expect-error
+					to: "/docs/documentation/style-guide",
 				},
 				{
-					title: "Search",
-					href: "/docs/in-progress",
+					label: "Search",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
-			],
+			]),
 		},
 		{
-			title: "Blog",
-			items: [
+			label: "Blog",
+			items: linkOptions([
 				{
-					title: "Introduction",
-					href: "/docs/in-progress",
+					label: "Introduction",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Build your own",
-					href: "/docs/in-progress",
+					label: "Build your own",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Writing Posts",
-					href: "/docs/in-progress",
+					label: "Writing Posts",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
-			],
+			]),
 		},
 		{
-			title: "Dashboard",
-			items: [
+			label: "Dashboard",
+			items: linkOptions([
 				{
-					title: "Introduction",
-					href: "/docs/in-progress",
+					label: "Introduction",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Layouts",
-					href: "/docs/in-progress",
+					label: "Layouts",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Server Components",
-					href: "/docs/in-progress",
+					label: "Server Components",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Authentication",
-					href: "/docs/in-progress",
+					label: "Authentication",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Database with Prisma",
-					href: "/docs/in-progress",
+					label: "Database with Prisma",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "API Routes",
-					href: "/docs/in-progress",
+					label: "API Routes",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
-			],
+			]),
 		},
 		{
-			title: "Marketing Site",
-			items: [
+			label: "Marketing Site",
+			items: linkOptions([
 				{
-					title: "Introduction",
-					href: "/docs/in-progress",
+					label: "Introduction",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "File Structure",
-					href: "/docs/in-progress",
+					label: "File Structure",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Tailwind CSS",
-					href: "/docs/in-progress",
+					label: "Tailwind CSS",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
 				{
-					title: "Typography",
-					href: "/docs/in-progress",
+					label: "Typography",
+					// @ts-expect-error
+					to: "/docs/in-progress",
 					disabled: true,
 				},
-			],
+			]),
 		},
 	],
 };

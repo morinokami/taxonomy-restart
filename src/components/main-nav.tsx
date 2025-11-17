@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import type { MainNavItem } from "@/types";
 
 interface MainNavProps {
-	items?: MainNavItem[];
+	items?: readonly MainNavItem[];
 	children?: React.ReactNode;
 }
 
@@ -27,14 +27,15 @@ export function MainNav({ items, children }: MainNavProps) {
 				<nav className="hidden gap-6 md:flex">
 					{items?.map((item) => (
 						<Link
-							key={item.title}
-							to={item.disabled ? "#" : item.href}
+							{...item}
+							key={item.to}
 							className={cn(
 								"flex items-center font-medium text-foreground/60 text-lg transition-colors hover:text-foreground/80 sm:text-sm [&.active]:text-foreground",
 								item.disabled && "cursor-not-allowed opacity-80",
 							)}
+							activeOptions={{ includeHash: true }}
 						>
-							{item.title}
+							{item.label}
 						</Link>
 					))}
 				</nav>

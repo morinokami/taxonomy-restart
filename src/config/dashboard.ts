@@ -1,32 +1,35 @@
+import { linkOptions } from "@tanstack/react-router";
+
 import type { DashboardConfig } from "@/types";
 
 export const dashboardConfig: DashboardConfig = {
-	mainNav: [
+	mainNav: linkOptions([
 		{
-			title: "Documentation",
-			href: "/docs",
+			label: "Documentation",
+			to: "/docs",
 		},
 		{
-			title: "Support",
-			href: "/support",
+			label: "Support",
+			// @ts-expect-error: not implemented
+			to: "/support",
 			disabled: true,
 		},
-	],
-	sidebarNav: [
+	]),
+	sidebarNav: linkOptions([
 		{
-			title: "Posts",
-			href: "/dashboard",
+			label: "Posts",
+			to: "/dashboard",
 			icon: "post",
 		},
 		{
-			title: "Billing",
-			href: "/dashboard/billing",
+			label: "Billing",
+			to: "/dashboard/billing",
 			icon: "billing",
 		},
 		{
-			title: "Settings",
-			href: "/dashboard/settings",
+			label: "Settings",
+			to: "/dashboard/settings",
 			icon: "settings",
 		},
-	],
+	]),
 };

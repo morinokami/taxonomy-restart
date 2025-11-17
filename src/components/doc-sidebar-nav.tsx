@@ -13,9 +13,9 @@ export function DocsSidebarNav({ items }: DocsSidebarNavProps) {
 	return items.length ? (
 		<div className="w-full">
 			{items.map((item) => (
-				<div key={item.title} className={cn("pb-8")}>
+				<div key={item.label} className={cn("pb-8")}>
 					<h4 className="mb-1 rounded-md px-2 py-1 font-medium text-sm">
-						{item.title}
+						{item.label}
 					</h4>
 					{item.items ? (
 						<DocsSidebarNavItems items={item.items} pathname={pathname} />
@@ -38,27 +38,25 @@ export function DocsSidebarNavItems({
 	return items?.length ? (
 		<div className="grid grid-flow-row auto-rows-max text-sm">
 			{items.map((item) =>
-				!item.disabled && item.href ? (
+				!item.disabled && item.to ? (
 					<Link
-						key={item.title}
-						to={item.href}
+						{...item}
+						key={item.label}
 						className={cn(
 							"flex w-full items-center rounded-md p-2 hover:underline",
 							{
-								"bg-muted": pathname === item.href,
+								"bg-muted": pathname === item.to,
 							},
 						)}
-						target={item.external ? "_blank" : ""}
-						rel={item.external ? "noreferrer" : ""}
 					>
-						{item.title}
+						{item.label}
 					</Link>
 				) : (
 					<span
-						key={item.title}
+						key={item.label}
 						className="flex w-full cursor-not-allowed items-center rounded-md p-2 opacity-60"
 					>
-						{item.title}
+						{item.label}
 					</span>
 				),
 			)}

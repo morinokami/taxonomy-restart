@@ -1,23 +1,24 @@
+import { linkOptions } from "@tanstack/react-router";
 import type { MarketingConfig } from "@/types";
 
-// TODO: Use linkOptions
 export const marketingConfig: MarketingConfig = {
-	mainNav: [
+	mainNav: linkOptions([
 		{
-			title: "Features",
-			href: "/#features",
+			to: "/",
+			label: "Features",
+			hash: "features",
 		},
 		{
-			title: "Pricing",
-			href: "/pricing",
+			to: "/pricing",
+			label: "Pricing",
 		},
 		{
-			title: "Blog",
-			href: "/blog",
+			to: "/blog",
+			label: "Blog",
 		},
 		{
-			title: "Documentation",
-			href: "/docs",
+			to: "/docs",
+			label: "Documentation",
 		},
-	],
+	]),
 };

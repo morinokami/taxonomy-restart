@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import type { MainNavItem } from "@/types";
 
 interface MobileNavProps {
-	items: MainNavItem[];
+	items: readonly MainNavItem[];
 	children?: React.ReactNode;
 }
 
@@ -28,14 +28,15 @@ export function MobileNav({ items, children }: MobileNavProps) {
 				<nav className="grid grid-flow-row auto-rows-max text-sm">
 					{items.map((item) => (
 						<Link
-							key={item.title}
-							to={item.disabled ? "#" : item.href}
+							{...item}
+							key={item.to}
 							className={cn(
 								"flex w-full items-center rounded-md p-2 font-medium text-sm hover:underline",
 								item.disabled && "cursor-not-allowed opacity-60",
 							)}
+							activeOptions={{ includeHash: true }}
 						>
-							{item.title}
+							{item.label}
 						</Link>
 					))}
 				</nav>
