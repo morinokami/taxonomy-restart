@@ -89,12 +89,23 @@ export const Route = createRootRoute({
 				name: "twitter:creator",
 				content: "@onDemocracy",
 			},
-			// TODO: favicon
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
+			},
+			{
+				rel: "icon",
+				href: "/favicon.ico",
+			},
+			{
+				rel: "shortcut icon",
+				href: "/favicon-16x16.png",
+			},
+			{
+				rel: "apple-touch-icon",
+				href: "/apple-touch-icon.png",
 			},
 		],
 	}),
