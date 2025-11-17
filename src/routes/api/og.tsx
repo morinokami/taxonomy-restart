@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ImageResponse } from "@vercel/og";
 import * as v from "valibot";
 
-import { ogImageSchema } from "@/lib/validations/og";
+import { OGImageSchema } from "@/lib/validations/og";
 
 // TODO: Should be loaded from local font
 const interRegular = fetch(
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/og")({
 
 					const url = new URL(request.url);
 					const values = v.parse(
-						ogImageSchema,
+						OGImageSchema,
 						Object.fromEntries(url.searchParams),
 					);
 					const heading =
@@ -95,7 +95,7 @@ export const Route = createFileRoute("/api/og")({
 								<div
 									tw="flex leading-[1.1] text-[80px] font-bold"
 									style={{
-										fontFamily: "Cal Sans",
+										fontFamily: "Inter Tight",
 										fontWeight: "bold",
 										marginLeft: "-3px",
 										fontSize,
