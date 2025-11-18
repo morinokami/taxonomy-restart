@@ -7,6 +7,6 @@ export const siteConfig: SiteConfig = {
 	ogImage: "https://taxonomy-restart.vercel.app/og.png",
 	links: {
 		x: "https://x.com/onDemocracy",
-		github: "https://github.com/morinokami/taxonomy-restart-v2",
+		github: "https://github.com/morinokami/taxonomy-restart",
 	},
 };
