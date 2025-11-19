@@ -38,7 +38,13 @@ function LoginPage() {
 				Back
 			</Link>
 			<div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-				<SignIn appearance={{ theme: [shadcn] }} />
+				<SignIn
+					appearance={{
+						theme: [shadcn],
+					}}
+					path="/login"
+					signUpUrl="/register"
+				/>
 			</div>
 		</div>
 	);
