@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { allGuides } from "content-collections";
 import { compareDesc } from "date-fns";
+import { generateMetadata } from "tanstack-meta";
 
 import { DocsPageHeader } from "@/components/docs-page-header";
 import { formatDate } from "@/lib/utils";
@@ -16,18 +17,17 @@ export const Route = createFileRoute("/(docs)/_docs-layout/guides/_layout/")({
 
 		return guides;
 	},
-	head: () => ({
-		meta: [
-			{
-				title: "Guides | Taxonomy Restart",
-			},
-			{
-				name: "description",
-				content:
-					"This section includes end-to-end guides for developing TanStack Start apps.",
-			},
-		],
-	}),
+	head: () => {
+		const { meta } = generateMetadata({
+			title: "Guides | Taxonomy Restart",
+			description:
+				"This section includes end-to-end guides for developing TanStack Start apps.",
+		});
+
+		return {
+			meta,
+		};
+	},
 });
 
 function GuidesPage() {

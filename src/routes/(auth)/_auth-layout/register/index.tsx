@@ -1,22 +1,23 @@
 import { SignUp } from "@clerk/tanstack-react-start";
 import { shadcn } from "@clerk/themes";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { generateMetadata } from "tanstack-meta";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(auth)/_auth-layout/register/")({
 	component: RegisterPage,
-	head: () => ({
-		meta: [
-			{
-				title: "Create an account | Taxonomy Restart",
-			},
-			{
-				description: "Create an account to get started",
-			},
-		],
-	}),
+	head: () => {
+		const { meta } = generateMetadata({
+			title: "Create an account | Taxonomy Restart",
+			description: "Create an account to get started",
+		});
+
+		return {
+			meta,
+		};
+	},
 });
 
 function RegisterPage() {

@@ -1,17 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { allPosts } from "content-collections";
+import { generateMetadata } from "tanstack-meta";
 
 import { formatDate } from "@/lib/utils";
 
 export const Route = createFileRoute("/(marketing)/_marketing-layout/blog/")({
 	component: BlogPage,
-	head: () => ({
-		meta: [
-			{
-				title: "Blog | Taxonomy Restart",
-			},
-		],
-	}),
+	head: () => {
+		const { meta } = generateMetadata({
+			title: "Blog | Taxonomy Restart",
+		});
+
+		return {
+			meta,
+		};
+	},
 });
 
 function BlogPage() {

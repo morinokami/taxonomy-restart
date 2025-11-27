@@ -1,6 +1,7 @@
 import { SignIn } from "@clerk/tanstack-react-start";
 import { shadcn } from "@clerk/themes";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { generateMetadata } from "tanstack-meta";
 
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
@@ -12,16 +13,16 @@ export const Route = createFileRoute("/(auth)/_auth-layout/login/")({
 	beforeLoad: async () => {
 		await redirectIfAuthenticated();
 	},
-	head: () => ({
-		meta: [
-			{
-				title: "Login | Taxonomy Restart",
-			},
-			{
-				description: "Login to your account",
-			},
-		],
-	}),
+	head: () => {
+		const { meta } = generateMetadata({
+			title: "Login | Taxonomy Restart",
+			description: "Login to your account",
+		});
+
+		return {
+			meta,
+		};
+	},
 });
 
 function LoginPage() {

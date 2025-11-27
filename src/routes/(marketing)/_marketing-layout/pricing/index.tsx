@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { generateMetadata } from "tanstack-meta";
 
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
@@ -7,13 +8,15 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/(marketing)/_marketing-layout/pricing/")(
 	{
 		component: PricingPage,
-		head: () => ({
-			meta: [
-				{
-					title: "Pricing | Taxonomy Restart",
-				},
-			],
-		}),
+		head: () => {
+			const { meta } = generateMetadata({
+				title: "Pricing | Taxonomy Restart",
+			});
+
+			return {
+				meta,
+			};
+		},
 	},
 );
 
