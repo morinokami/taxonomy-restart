@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { generateMetadata } from "tanstack-meta";
 
 import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardShell } from "@/components/dashboard-shell";
@@ -12,13 +13,15 @@ export const Route = createFileRoute(
 )({
 	component: DashboardPage,
 	loader: async () => await getPosts(),
-	head: () => ({
-		meta: [
-			{
-				title: "Dashboard | Taxonomy Restart",
-			},
-		],
-	}),
+	head: () => {
+		const { meta } = generateMetadata({
+			title: "Dashboard | Taxonomy Restart",
+		});
+
+		return {
+			meta,
+		};
+	},
 });
 
 function DashboardPage() {
