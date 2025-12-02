@@ -23,8 +23,9 @@ export function EmptyPlaceholder({
 	);
 }
 
-interface EmptyPlaceholderIconProps
-	extends Partial<React.SVGProps<SVGSVGElement>> {
+interface EmptyPlaceholderIconProps extends Partial<
+	React.SVGProps<SVGSVGElement>
+> {
 	name: keyof typeof Icons;
 }
 
@@ -46,8 +47,7 @@ EmptyPlaceholder.Icon = function EmptyPlaceHolderIcon({
 	);
 };
 
-interface EmptyPlacholderTitleProps
-	extends React.HTMLAttributes<HTMLHeadingElement> {}
+interface EmptyPlacholderTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
 
 EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
 	className,
@@ -58,8 +58,7 @@ EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
 	);
 };
 
-interface EmptyPlacholderDescriptionProps
-	extends React.HTMLAttributes<HTMLParagraphElement> {}
+interface EmptyPlacholderDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
 EmptyPlaceholder.Description = function EmptyPlaceholderDescription({
 	className,

@@ -13,6 +13,10 @@ export const Route = createRootRoute({
 	head: () => {
 		const { meta, links } = generateMetadata({
 			charSet: "utf-8",
+			viewport: {
+				width: "device-width",
+				initialScale: 1,
+			},
 			title: siteConfig.name,
 			description: siteConfig.description,
 			keywords: ["TanStack", "TanStack Start", "React"],
@@ -46,13 +50,7 @@ export const Route = createRootRoute({
 		});
 
 		return {
-			meta: [
-				{
-					name: "viewport",
-					content: "width=device-width, initial-scale=1",
-				},
-				...meta,
-			],
+			meta,
 			links: [
 				{
 					rel: "stylesheet",

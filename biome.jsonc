@@ -18,10 +18,6 @@
 			"!**/src/styles/*.css"
 		]
 	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
-	},
 	"assist": {
 		"actions": {
 			"source": {
@@ -36,11 +32,6 @@
 			"nursery": {
 				"useSortedClasses": "error"
 			}
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double"
 		}
 	}
 }
