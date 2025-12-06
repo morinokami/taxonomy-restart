@@ -1,11 +1,10 @@
 // TODO: it works, but there are some type errors that need to be fixed
 
 import type EditorJS from "@editorjs/editorjs";
-import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useForm } from "@tanstack/react-form";
 import { Link, useNavigate } from "@tanstack/react-router";
 import type { Prisma } from "generated/prisma/client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { toast } from "sonner";
 import * as v from "valibot";
@@ -23,11 +22,40 @@ interface EditorProps {
 	}>;
 }
 
-type FormData = v.InferOutput<typeof PostPatchSchema>;
-
 export function Editor({ post }: EditorProps) {
-	const { register, handleSubmit } = useForm<FormData>({
-		resolver: valibotResolver(PostPatchSchema),
+	const form = useForm({
+		defaultValues: {
+			title: post.title,
+			content: post.content,
+		},
+		validators: {
+			onChange: PostPatchSchema,
+		},
+		onSubmit: async ({ value: data }) => {
+			setIsSaving(true);
+
+			const blocks = await ref.current?.save();
+
+			const updated = await updatePost({
+				data: {
+					postId: post.id,
+					title: data.title,
+					content: blocks,
+				},
+			});
+
+			setIsSaving(false);
+
+			if (!updated) {
+				return toast.error("Something went wrong.", {
+					description: "Your post was not saved. Please try again.",
+				});
+			}
+
+			navigate({ to: ".", reloadDocument: true });
+
+			return toast.success("Your post has been saved.");
+		},
 	});
 	const ref = useRef<EditorJS | null>(null);
 	const navigate = useNavigate({ from: "/editor/$postId" });
@@ -85,38 +113,17 @@ export function Editor({ post }: EditorProps) {
 		}
 	}, [isMounted, initializeEditor]);
 
-	async function onSubmit(data: FormData) {
-		setIsSaving(true);
-
-		const blocks = await ref.current?.save();
-
-		const updated = await updatePost({
-			data: {
-				postId: post.id,
-				title: data.title,
-				content: blocks,
-			},
-		});
-
-		setIsSaving(false);
-
-		if (!updated) {
-			return toast.error("Something went wrong.", {
-				description: "Your post was not saved. Please try again.",
-			});
-		}
-
-		navigate({ to: ".", reloadDocument: true });
-
-		return toast.success("Your post has been saved.");
-	}
-
 	if (!isMounted) {
 		return null;
 	}
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form
+			onSubmit={(e) => {
+				e.preventDefault();
+				form.handleSubmit();
+			}}
+		>
 			<div className="grid w-full gap-10">
 				<div className="flex w-full items-center justify-between">
 					<div className="flex items-center space-x-10">
@@ -139,13 +146,20 @@ export function Editor({ post }: EditorProps) {
 					</button>
 				</div>
 				<div className="prose prose-stone dark:prose-invert mx-auto w-[800px]">
-					<TextareaAutosize
-						autoFocus
-						id="title"
-						defaultValue={post.title}
-						placeholder="Post title"
-						className="w-full resize-none appearance-none overflow-hidden bg-transparent font-bold text-5xl focus:outline-none"
-						{...register("title")}
+					<form.Field
+						name="title"
+						children={(field) => (
+							<TextareaAutosize
+								autoFocus
+								id="title"
+								defaultValue={post.title}
+								placeholder="Post title"
+								className="w-full resize-none appearance-none overflow-hidden bg-transparent font-bold text-5xl focus:outline-none"
+								value={field.state.value}
+								onChange={(e) => field.handleChange(e.target.value)}
+								onBlur={field.handleBlur}
+							/>
+						)}
 					/>
 					<div id="editor" className="min-h-[500px]" />
 					<p className="text-gray-500 text-sm">

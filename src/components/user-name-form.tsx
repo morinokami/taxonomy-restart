@@ -1,9 +1,7 @@
 import { useUser } from "@clerk/tanstack-react-start";
-import { valibotResolver } from "@hookform/resolvers/valibot";
+import { useForm } from "@tanstack/react-form";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import type * as v from "valibot";
 
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
@@ -25,8 +23,6 @@ interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
 	lastName: string | null;
 }
 
-type FormData = v.InferOutput<typeof UserNameSchema>;
-
 export function UserNameForm({
 	firstName,
 	lastName,
@@ -34,41 +30,41 @@ export function UserNameForm({
 	...props
 }: UserNameFormProps) {
 	const { user } = useUser();
-	const {
-		handleSubmit,
-		register,
-		formState: { errors },
-	} = useForm<FormData>({
-		resolver: valibotResolver(UserNameSchema),
+	const form = useForm({
 		defaultValues: {
 			firstName: firstName ?? "",
 			lastName: lastName ?? "",
 		},
+		validators: {
+			onChange: UserNameSchema,
+		},
+		onSubmit: async ({ value: data }) => {
+			setIsSaving(true);
+
+			try {
+				await user?.update({
+					firstName: data.firstName,
+					lastName: data.lastName,
+				});
+				toast.success("Your name has been updated.");
+			} catch (_) {
+				toast.error("Something went wrong.", {
+					description: "Your name was not updated. Please try again.",
+				});
+			} finally {
+				setIsSaving(false);
+			}
+		},
 	});
 	const [isSaving, setIsSaving] = useState<boolean>(false);
-
-	async function onSubmit(data: FormData) {
-		setIsSaving(true);
-
-		try {
-			await user?.update({
-				firstName: data.firstName,
-				lastName: data.lastName,
-			});
-			toast.success("Your name has been updated.");
-		} catch (_) {
-			toast.error("Something went wrong.", {
-				description: "Your name was not updated. Please try again.",
-			});
-		} finally {
-			setIsSaving(false);
-		}
-	}
 
 	return (
 		<form
 			className={cn(className)}
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={(e) => {
+				e.preventDefault();
+				form.handleSubmit();
+			}}
 			{...props}
 		>
 			<Card>
@@ -81,34 +77,60 @@ export function UserNameForm({
 				</CardHeader>
 				<CardContent>
 					<div className="grid gap-1">
-						<Label className="sr-only" htmlFor="firstName">
-							First Name
-						</Label>
-						<Input
-							id="firstName"
-							className="w-[400px]"
-							size={32}
-							{...register("firstName")}
+						<form.Field
+							name="firstName"
+							children={(field) => {
+								return (
+									<>
+										<Label className="sr-only" htmlFor="firstName">
+											First Name
+										</Label>
+										<Input
+											id="firstName"
+											className="w-[400px]"
+											size={32}
+											value={field.state.value}
+											onChange={(e) => field.handleChange(e.target.value)}
+											onBlur={field.handleBlur}
+										/>
+										{!field.state.meta.isValid && (
+											<p className="px-1 text-red-600 text-xs">
+												{field.state.meta.errors
+													.map((error) => error?.message)
+													.join(", ")}
+											</p>
+										)}
+									</>
+								);
+							}}
 						/>
-						{errors?.firstName && (
-							<p className="px-1 text-red-600 text-xs">
-								{errors.firstName.message}
-							</p>
-						)}
-						<label className="sr-only" htmlFor="lastName">
-							Last Name
-						</label>
-						<Input
-							id="lastName"
-							className="w-[400px]"
-							size={32}
-							{...register("lastName")}
+						<form.Field
+							name="lastName"
+							children={(field) => {
+								return (
+									<>
+										<label className="sr-only" htmlFor="lastName">
+											Last Name
+										</label>
+										<Input
+											id="lastName"
+											className="w-[400px]"
+											size={32}
+											value={field.state.value}
+											onChange={(e) => field.handleChange(e.target.value)}
+											onBlur={field.handleBlur}
+										/>
+										{!field.state.meta.isValid && (
+											<p className="px-1 text-red-600 text-xs">
+												{field.state.meta.errors
+													.map((error) => error?.message)
+													.join(", ")}
+											</p>
+										)}
+									</>
+								);
+							}}
 						/>
-						{errors?.lastName && (
-							<p className="px-1 text-red-600 text-xs">
-								{errors.lastName.message}
-							</p>
-						)}
 					</div>
 				</CardContent>
 				<CardFooter>

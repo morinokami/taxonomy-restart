@@ -20,7 +20,7 @@ This is a clone of shadcn's [Taxonomy](https://github.com/shadcn-ui/taxonomy) ap
 - Styling using [Tailwind CSS](https://tailwindcss.com/)
 - Documentation and blog using [MDX](https://mdxjs.com/) and [Content Collections](https://www.content-collections.dev/)
 - Subscriptions using [Stripe](https://stripe.com/)
-- Forms using [React Hook Form](https://react-hook-form.com/)
+- Forms using [TanStack Form](https://tanstack.com/form)
 - Validation using [Valibot](https://valibot.dev/)
 - Open Graph image generation using [@vercel/og](https://www.npmjs.com/package/@vercel/og)
 - Written in [TypeScript](https://www.typescriptlang.org/)
