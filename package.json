@@ -9,7 +9,7 @@
     "serve": "bun --bun vite preview",
     "format": "oxfmt",
     "lint": "biome lint",
-    "postinstall": "prisma generate --no-engine"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/backend": "2.25.1",
@@ -25,8 +25,8 @@
     "@editorjs/paragraph": "2.9.0",
     "@editorjs/table": "2.2.1",
     "@hookform/resolvers": "5.2.2",
-    "@prisma/client": "6.19.0",
-    "@prisma/extension-accelerate": "2.0.2",
+    "@prisma/client": "7.1.0",
+    "@prisma/extension-accelerate": "3.0.1",
     "@radix-ui/react-alert-dialog": "1.1.15",
     "@radix-ui/react-avatar": "1.1.11",
     "@radix-ui/react-dropdown-menu": "2.1.16",
@@ -79,7 +79,7 @@
     "@vitejs/plugin-react": "5.1.1",
     "babel-plugin-react-compiler": "1.0.0",
     "oxfmt": "0.16.0",
-    "prisma": "6.19.0",
+    "prisma": "7.1.0",
     "typescript": "5.9.3",
     "vite": "7.2.6",
     "vite-tsconfig-paths": "5.1.4"
